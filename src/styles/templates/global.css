@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Cream Cake';
+    src: url(/src/styles/fonts/Cream\ Cake.otf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.Titulo {
+    font-family: 'Cream Cake';
+}
+
+.TituloBarra {
+    font-family: 'Cream Cake';
+    font-size: 40px;
+    margin-right: 50px;
+}
+
+.Barra {
+    color: brown !important;
+    
+}

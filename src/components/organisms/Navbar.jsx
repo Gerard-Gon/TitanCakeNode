@@ -1,10 +1,10 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import '../../styles/organisms/navbar.css';
+import '../../styles/organisms/navbar.css'
 
 
 function NavBar() {
  return (
-   <Navbar bg="dark" variant="dark" expand="lg" className='Barra'>
+   <Navbar variant="dark" expand="lg" className='barra'>
      <Container>
        <Navbar.Brand href="/" className='TituloBarra'>TitanCake</Navbar.Brand>
        <Navbar.Toggle aria-controls="basic-navbar-nav" />

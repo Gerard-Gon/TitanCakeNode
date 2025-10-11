@@ -5,7 +5,7 @@ function Nosotros() {
     <section>
         <div class="centrador">
             <h1 class="subtitulo">Sobre Nosotros</h1> 
-            <NosotrosCard />
+            <NosotrosCard/>
         </div>
     </section>
   );

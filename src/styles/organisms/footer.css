@@ -1,0 +1,30 @@
+.footer {
+  background-color: rgba(182, 82, 15, 0.699);
+  color: #ffffff;
+  font-family: 'Cream Cake';
+  font-size: 28px ;
+}
+
+.footer-section h5 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.footer-section a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border-top: 1px solid #dcb3d8;
+  margin-top: 20px;
+}
+
+.copyright {
+  font-size: 0.9em;
+  margin-top: 10px;
+}

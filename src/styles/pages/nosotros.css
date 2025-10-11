@@ -1,0 +1,35 @@
+.cardnosotros{
+    width: auto;
+    background-color: #D7BFAE !important;
+    color: black;
+    font-family: 'Cream Cake', cursive;
+    font-size: 35px;
+    padding: 0px 10px 20px 30px;
+    border: 3px solid black;
+    border-radius: 8px;
+    margin: 10px;
+    user-select: none;
+}
+
+.cajita:hover{
+    color: black;
+    cursor: pointer;
+    width: auto;
+    font-size: auto;
+    font-family: 'Cream Cake',cursive;
+    font-weight: bold;
+}
+.subtitulo{
+    font-family: 'Cream Cake';
+    font-size: 60px;
+    margin: 10px 10px;
+}
+
+.imagen {
+  width: 240px;
+  height: 240px;
+  object-fit: contain;
+  display: block;
+  margin: 5px auto;
+  border-radius: 50%;
+}

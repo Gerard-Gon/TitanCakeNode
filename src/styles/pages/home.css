@@ -1,0 +1,14 @@
+.logo-carousel {
+  width: 240px;
+  height: 240px;
+  object-fit: contain;
+  display: block;    
+  margin: 0 auto;     
+}
+
+.texto_carrousel{
+    color: black;
+    font-family: 'Cream cake';
+    font-size: 25px;
+    margin: 10px 10px;
+}

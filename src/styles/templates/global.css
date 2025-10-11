@@ -15,9 +15,11 @@
     margin-right: 50px;
 }
 
-/*.Barra {
-    color: brown !important;
-     background-color: brown !important;
-    
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-color: beige;
+  
 }
-     */
+

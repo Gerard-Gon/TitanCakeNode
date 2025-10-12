@@ -7,6 +7,7 @@ import Text from '../components/atoms/Text.jsx';
 import Button from '../components/atoms/Button.jsx';
 import { useNavigate } from 'react-router-dom';
 
+
 const image = {
     src: 'https://i.pinimg.com/originals/4b/21/22/4b2122e5164f6a736b0f6fdaa02a8bd9.gif',
     alt: 'Not Found Image',

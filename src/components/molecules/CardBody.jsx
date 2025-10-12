@@ -6,9 +6,9 @@ function CardBody({ title, description, price }) {
    <>
      <Text variant="h5">{title}</Text>
      <Text variant="p">{description}</Text>
-     <Text variant="span" className="text-muted">
-       ${price}
-     </Text>
+           {price !== undefined && (
+        <Text variant="span" className="text-muted">${price}</Text>//Solucion para que aparezca solo en details y no en productos con valor vacio 
+        )}
    </>
  );
 }

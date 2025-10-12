@@ -3,7 +3,7 @@ import Image from '../atoms/Image';
 import Button from '../atoms/Button';
 import CardBody from '../molecules/CardBody';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/organisms/productscard.css'
+import '../../styles/organisms/productscard.css';
 
 
 function ProductCard({ product }) {
@@ -13,7 +13,7 @@ function ProductCard({ product }) {
  return (
    <Card style={{ width: '18rem' }} className="m-2 marron">
      <Image src={product.image} alt={product.name} className="card-img-top" />
-     <Card.Body>
+     <Card.Body className='texto-producto'>
        <CardBody
          title={product.name}
          description={product.description}

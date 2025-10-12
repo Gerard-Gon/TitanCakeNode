@@ -1,4 +1,4 @@
-import NosotrosCard from '../components/molecules/NosotrosCard';
+import NosotrosCard from '../components/organisms/NosotrosCard';
 
 function Nosotros() {
   return (

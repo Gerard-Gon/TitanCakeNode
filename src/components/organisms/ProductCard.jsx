@@ -18,7 +18,7 @@ function ProductCard({ product }) {
          title={product.name}
          description={product.description}
        />
-       <Button variant="primary" onClick={() => navigate(`/products/${product.id}`)}>
+       <Button variant="light" onClick={() => navigate(`/products/${product.id}`)}>
          Ver detalles
        </Button>
      </Card.Body>

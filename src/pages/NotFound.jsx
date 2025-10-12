@@ -4,7 +4,7 @@ import Image from '../components/atoms/Image';
 import '../styles/pages/notfound.css'
 
 const image = {
-    src: 'https://i.pinimg.com/originals/4b/21/22/4b2122e5164f6a736b0f6fdaa02a8bd9.gif',
+    src: 'https://media.tenor.com/zGQLL-kwwEoAAAAM/cat-meme-pee.gif',
     alt: 'Not Found Image',
 }
 

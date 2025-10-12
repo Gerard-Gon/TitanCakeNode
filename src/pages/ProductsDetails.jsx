@@ -39,7 +39,6 @@ function ProductDetail() {
         <Card.Body>
           <Text variant="h2">{product.name}</Text>
           <Text variant="p">{product.description}</Text>
-          <Text variant="h4">${product.price}</Text>
         </Card.Body>
         
       </Card>

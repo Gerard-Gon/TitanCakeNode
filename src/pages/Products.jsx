@@ -4,6 +4,7 @@ import ProductCard from '../components/organisms/ProductCard';
 import '../styles/pages/products.css'
 
 
+
 function Products() {
  return (
   <div className='centrador'>

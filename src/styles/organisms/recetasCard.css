@@ -28,8 +28,11 @@
 }
 
 .card-img-top {
-  height: 250px; /* ajusta según lo que se vea mejor */
+  margin: 15px 15px;
+  height: 240px; /* ajusta según lo que se vea mejor */
   object-fit: cover;
-  width: 100%;
+  width: 90% !important;
+  border-radius: 10px;
+
 }
 

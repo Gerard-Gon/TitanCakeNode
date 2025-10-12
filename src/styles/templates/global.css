@@ -21,7 +21,28 @@ body {
   min-height: 100vh;
   flex-direction: column;
   background-color: beige;
-  
+  background-image: url('/src/img/fondo-beige-con-dibu.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: #3e2723;
 }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%); /* Invierte el color blanco a negro */
+}
+/*
+.fondo {
+  background-image: url('/src/img/fondo-beige-con-dibu.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 50px 20px;
+  color: #3e2723;
+}
+*/
 
 

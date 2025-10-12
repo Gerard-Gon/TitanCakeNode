@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import '../../styles/organisms/navbar.css';
 import cartIcon from '../../img/cart-icon.png';
+import sesionIcon from '../../img/sesion.webp';
 
 function NavBar() {
   const [cartCount, setCartCount] = useState(0);
@@ -62,6 +63,18 @@ function NavBar() {
                 </span>
               )}
             </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link href="/login" style={{ position: 'relative' }}>
+              <img
+                src={sesionIcon}
+                alt="Sesion"
+                style={{ width: '60px', height: '60px' }}
+              />
+            </Nav.Link>
+          </Nav>
+          <Nav className="me-auto">
+            <Nav.Link href="/registro">Registrar Cuenta</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

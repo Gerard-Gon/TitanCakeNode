@@ -9,6 +9,7 @@ import RecetasDetail from './pages/RecetasDetail';
 import NotFound from './pages/NotFound';
 import ProductDetail from './pages/ProductsDetails';
 import Carrito from './pages/Carrito';
+import { LoginPage } from './pages/LoginPage';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
        <Route path="/recetas/:id" element={<RecetasDetail />} />
        <Route path="/carrito" element={<Carrito />} />
        <Route path="*" element={<NotFound />} />
+       <Route path="/login" element={<LoginPage />} />
      </Routes>
      </main>
      <Footer />

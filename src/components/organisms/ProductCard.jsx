@@ -17,9 +17,23 @@ function ProductCard({ product }) {
        <CardBody
          title={product.name}
          description={product.description}
+         price={product.price}
        />
-       <Button variant="light" onClick={() => navigate(`/products/${product.id}`)}>
+       <Button variant="info" onClick={() => navigate(`/products/${product.id}`)}>
          Ver detalles
+       </Button>
+       <Button variant="primary" onClick={() => {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existing = cart.find(item => item.id === product.id);
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cart.push({ ...product, quantity: 1 });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }}
+        >
+        Agregar al carrito
        </Button>
      </Card.Body>
    </Card>

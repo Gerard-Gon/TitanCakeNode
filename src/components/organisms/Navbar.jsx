@@ -1,6 +1,6 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import '../../styles/organisms/navbar.css'
-
+import cartIcon from '../../img/cart-icon.png';
 
 function NavBar() {
  return (
@@ -14,14 +14,21 @@ function NavBar() {
            <Nav.Link href="/products">Productos</Nav.Link>
            <Nav.Link href="/nosotros">Sobre Nosotros</Nav.Link>
            <Nav.Link href="/blog">Blog</Nav.Link>
-           
-           
+           <Nav.Link href="/carrito">Carrito</Nav.Link>
          </Nav>
+         <Nav>
+            <Nav.Link href="/carrito">
+              <img
+                src={cartIcon}
+                alt="Carrito"
+                style={{ width: '60px', height: '60px' }}
+              />
+            </Nav.Link>
+          </Nav>
        </Navbar.Collapse>
      </Container>
    </Navbar>
  );
 }
-
 
 export default NavBar;

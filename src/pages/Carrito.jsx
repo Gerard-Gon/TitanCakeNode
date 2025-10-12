@@ -68,19 +68,19 @@ function Carrito() {
                     <Button variant="success" size="sm" onClick={() => increment(item.id)}>+</Button>{' '}
                     <Button variant="secondary" size="sm" onClick={() => decrement(item.id)}>-</Button>{' '}
                     <Button variant="danger" size="sm" onClick={() => remove(item.id)}>Eliminar</Button>
-                    <Button variant="success" onClick={() => {alert('🎉 ¡Gracias por su compra!'); 
-                      localStorage.removeItem('cart'); // Vacía el carrito
-                      window.location.reload(); // Refresca la página para actualizar el estado
-                    }}
-                    >
-                      Pagar
-                    </Button>
-
                   </td>
                 </tr>
               ))}
             </tbody>
           </Table>
+            <Button variant="success" onClick={() => {alert('🎉 ¡Gracias por su compra!'); 
+            localStorage.removeItem('cart'); // Vacía el carrito
+            window.location.reload(); // Refresca la página para actualizar el estado
+            }}
+            >
+              Pagar
+            </Button>
+          
           <h4>Total: ${total}</h4>
         </>
       )}

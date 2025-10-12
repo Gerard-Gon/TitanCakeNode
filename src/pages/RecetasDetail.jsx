@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import recetas from '../data/recetas.js';
 import Image from '../components/atoms/Image.jsx';
 import Text from '../components/atoms/Text.jsx';
+import rat from '../img/recortar solo el rat.png';
+
 
 const image = {
-    src: 'https://i.pinimg.com/originals/4b/21/22/4b2122e5164f6a736b0f6fdaa02a8bd9.gif',
+    src: rat,
     alt: 'Not Found Image',
 }
 

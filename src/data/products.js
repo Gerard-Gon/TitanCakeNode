@@ -21,7 +21,7 @@ const products = [{
     },
     {
         id: 4,
-        name: 'berlin',
+        name: 'Merenguitos',
         description: 'Una joya de la repostería nacional: capas de merengue crocante, rellenas con abundante manjar casero y cubiertas con azúcar flor. Su textura ligera y su dulzura equilibrada lo convierten en el favorito de generaciones.',
         price: 700,
         image: 'https://cocinachilena.cl/wp-content/uploads/2012/12/merenguitos-9-scaled.jpg'  

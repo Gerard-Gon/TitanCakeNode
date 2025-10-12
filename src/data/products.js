@@ -18,6 +18,13 @@ const products = [{
         description: 'Es un bizcocho suave y aireado, formado por dos tapas que se rellenan con manjar. Se caracteriza por estar cubierto con una generosa capa de azúcar flor.',
         price: 500,
         image: 'https://www.recetasthermomix.cl/wp-content/uploads/empolvado-1.jpg' 
+    },
+    {
+        id: 4,
+        name: 'berlin',
+        description: 'Una joya de la repostería nacional: capas de merengue crocante, rellenas con abundante manjar casero y cubiertas con azúcar flor. Su textura ligera y su dulzura equilibrada lo convierten en el favorito de generaciones.',
+        price: 700,
+        image: 'https://cocinachilena.cl/wp-content/uploads/2012/12/merenguitos-9-scaled.jpg'  
     }
 ];
 

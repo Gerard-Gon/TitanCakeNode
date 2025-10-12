@@ -1,0 +1,35 @@
+.card.marron {
+  background-color: #4b2e2e;
+  color: #fff;
+  border: none;
+  height: 100%; /* permite que ocupe todo el alto disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card.marron .card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card.marron .btn-light {
+  background-color: #fff;
+  color: #4b2e2e;
+  border: none;
+  margin-top: auto; /* empuja el botón hacia abajo */
+}
+
+.card.marron .btn-light:hover {
+  background-color: #e6d3c6;
+  color: #3a1f1f;
+}
+
+.card-img-top {
+  margin-top: 10px;
+  height: 250px; /* ajusta según lo que se vea mejor */
+  object-fit: cover;
+  width: 100%;
+}

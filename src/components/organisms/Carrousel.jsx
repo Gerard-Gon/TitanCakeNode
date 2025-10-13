@@ -1,3 +1,4 @@
+import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import ExampleCarouselImage from '../../components/atoms/ExampleCarouselImage';
 import Foto1 from '../../img/Logo.webp';
@@ -9,7 +10,7 @@ import '../../styles/pages/home.css';
  
 function Carrousel() {
   return (
-    <div class="centrador">
+    <div className="centrador" data-testid="carrousel">
       <Container className="my-5">
         <Carousel>
           <Carousel.Item>

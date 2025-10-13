@@ -6,7 +6,8 @@ import Image from '../components/atoms/Image.jsx';
 import Text from '../components/atoms/Text.jsx';
 import Button from '../components/atoms/Button.jsx';
 import { useNavigate } from 'react-router-dom';
-
+import '../styles/pages/productsdetails.css'
+import CardBody from '../components/molecules/CardBody.jsx';
 
 const image = {
     src: 'https://i.pinimg.com/originals/4b/21/22/4b2122e5164f6a736b0f6fdaa02a8bd9.gif',
@@ -30,18 +31,19 @@ function ProductDetail() {
   }
 
   return (
-    <Container className="my-5">
-      <Button variant="primary" onClick={() => navigate(`/products`)}>
-          Volver
-        </Button>
-      <Card>
-        <Image src={product.image} alt={product.name} className="card-img-top" />
-        <Card.Body>
-          <Text variant="h2">{product.name}</Text>
-          <Text variant="p">{product.description}</Text>
-        </Card.Body>
-        
-      </Card>
+    <Container className="centrador">
+    <Button variant="info" onClick={() => navigate(`/products`)}>
+      Volver
+    </Button>
+    <Card style={{ width: '28rem' }} className="m-2 marron">
+      <Image src={product.image} alt={product.name} className="card-img-top-products-detail" />
+      <Card.Body className='texto-producto'>
+        <CardBody
+          title={product.name}
+          description={product.description}
+        />
+      </Card.Body>
+    </Card>
     </Container>
   );
 }

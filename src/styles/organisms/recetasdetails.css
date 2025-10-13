@@ -1,0 +1,38 @@
+.card.marron {
+  width: 240px;
+  background-color: #4b2e2e;
+  color: #fff;
+  border: none;
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card.marron .card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card.marron .btn-light {
+  background-color: #fff;
+  color: #4b2e2e;
+  border: none;
+  margin-top: auto;
+}
+
+.card.marron .btn-light:hover {
+  background-color: #e6d3c6;
+  color: #3a1f1f;
+}
+
+.card-img-top-details {
+  margin: 20px 30px;
+  height: 240px; 
+  object-fit: cover;
+  width: 90% !important;
+  border-radius: 10px;
+
+}

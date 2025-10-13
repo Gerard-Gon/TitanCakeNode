@@ -10,7 +10,7 @@ function NosotrosCard() {
         <Image src={Logo} alt="logo titancake" className="imagen" />
         <Card.Body>
           <Card.Text>
-            👨‍🍳 Nuestro equipo titánico<br/>
+            Nuestro equipo titánico<br/>
             En TitanCake, los pasteles no se hacen por arte de magia (aunque a veces lo parece). Detrás de cada berlín relleno con precisión quirúrgica y cada chilenito que desafía las leyes de la física está nuestro escuadrón pastelero:<br/>
             <li>Gérard González, maestro del merengue y domador oficial de batidoras rebeldes. Si el manjar está perfectamente cremoso, es porque él lo convenció con pura paciencia y talento.<br/></li>
             <li>Oscar Astudillo, el estratega de los empolvados. Sabe exactamente cuánta azúcar flor es suficiente para que no parezca una tormenta de nieve. Su técnica es tan precisa que los empolvados salen suaves, parejitos y con actitud.<br/></li>

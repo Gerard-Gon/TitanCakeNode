@@ -43,7 +43,7 @@ function CarritoStructure() {
 
   return (
     <div className="container mt-4 centrador">
-      <h1>🛒 Carrito de Compras</h1>
+      <h1>Carrito de Compras</h1>
       <br />
       <h2>Resumen de tu pedido: </h2>
       <br />
@@ -77,7 +77,7 @@ function CarritoStructure() {
               ))}
             </tbody>
           </Table>
-            <Button variant="success" onClick={() => {alert('🎉 ¡Gracias por su compra!'); 
+            <Button variant="success" onClick={() => {alert('¡Gracias por su compra!'); 
             localStorage.removeItem('cart'); 
             window.location.reload(); 
             }}

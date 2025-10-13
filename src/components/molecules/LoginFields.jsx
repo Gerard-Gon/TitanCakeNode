@@ -7,7 +7,7 @@ export function LoginFields({ username, setUsername, password, setPassword }) {
         type="text"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        placeholder="Usuario"
+        placeholder="Correo Electronico"
       />
       <InputField
         type="password"

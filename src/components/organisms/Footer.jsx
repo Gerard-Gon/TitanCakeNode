@@ -8,7 +8,7 @@ function Footer() {
         <Row>
           <Col md={4} className="footer-section">
             <h5>TitanCake</h5>
-            <p>Endulzando tus momentos desde 2025 🍬</p>
+            <p>Endulzando tus momentos desde 2025</p>
           </Col>
           <Col md={4} className="footer-section">
             <h5>Enlaces</h5>

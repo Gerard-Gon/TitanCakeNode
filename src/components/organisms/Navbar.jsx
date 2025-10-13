@@ -27,7 +27,7 @@ function NavBar() {
 
   return (
     <Navbar variant="dark" expand="lg" className='barra'>
-      <Container>
+      <Container className='me-auto'>
         <Navbar.Brand href="/" className='TituloBarra'>TitanCake</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -38,7 +38,7 @@ function NavBar() {
             <Nav.Link href="/blog">Blog</Nav.Link>
             <Nav.Link href="/carrito">Carrito</Nav.Link>
           </Nav>
-          <Nav>
+          <Nav className="ms-auto align-items-center gap-3"> {/* Agrupado y alineado a la derecha */}
             <Nav.Link href="/carrito" style={{ position: 'relative' }}>
               <img
                 src={cartIcon}
@@ -63,8 +63,7 @@ function NavBar() {
                 </span>
               )}
             </Nav.Link>
-          </Nav>
-          <Nav>
+
             <Nav.Link href="/login" style={{ position: 'relative' }}>
               <img
                 src={sesionIcon}
@@ -72,9 +71,10 @@ function NavBar() {
                 style={{ width: '60px', height: '60px' }}
               />
             </Nav.Link>
-          </Nav>
-          <Nav className="me-auto">
-            <Nav.Link href="/registro">Registrar Cuenta</Nav.Link>
+
+            <Nav.Link href="/register" className="me-auto">
+              Registrar Cuenta
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

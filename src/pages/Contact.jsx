@@ -59,7 +59,7 @@ function Contact() {
         <div className="login-container centrador login-wrapper">
             <Container className="my-5">
                 <Text variant="h1" className="form-title">Contacto</Text>
-                <Text variant="p">Llena el formulario para poder contactarte</Text>
+                <Text variant="p">Llena el formulario para informar el error y contactarte</Text>
                 <DynamicForm inputs={formInputs} />
                 <div className="mt-3">
                     <Button variant="primary" onClick={handleSubmit} className="me-2">

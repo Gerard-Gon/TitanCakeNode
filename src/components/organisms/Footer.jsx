@@ -17,6 +17,7 @@ function Footer() {
               <li><a href="/products">Productos</a></li>
               <li><a href="/nosotros">Sobre Nosotros</a></li>
               <li><a href="/blog">Blog</a></li>
+              <li><a href="/contact">Contacto</a></li>
             </ul>
           </Col>
           <Col md={4} className="footer-section">

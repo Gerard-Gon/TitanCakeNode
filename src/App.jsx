@@ -10,7 +10,8 @@ import NotFound from './pages/NotFound';
 import ProductDetail from './pages/ProductsDetails';
 import Carrito from './pages/Carrito';
 import { LoginPage } from './pages/LoginPage';
-import {RegisterPage} from './pages/Registro'
+import {RegisterPage} from './pages/Registro';
+import Contact from './pages/Contact';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
        <Route path="/Blog" element={<Blog />} />
        <Route path="/recetas/:id" element={<RecetasDetail />} />
        <Route path="/carrito" element={<Carrito />} />
+       <Route path="/contact" element={<Contact />} />
        <Route path="*" element={<NotFound />} />
        <Route path="/login" element={<LoginPage />} />
        <Route path="/register" element={<RegisterPage />} />

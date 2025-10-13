@@ -36,7 +36,7 @@ function NavBar() {
             <Nav.Link href="/products">Productos</Nav.Link>
             <Nav.Link href="/nosotros">Sobre Nosotros</Nav.Link>
             <Nav.Link href="/blog">Blog</Nav.Link>
-            <Nav.Link href="/carrito">Carrito</Nav.Link>
+            <Nav.Link href="/contact">Contacto</Nav.Link>
           </Nav>
           <Nav className="ms-auto align-items-center gap-3"> {/* Agrupado y alineado a la derecha */}
             <Nav.Link href="/carrito" style={{ position: 'relative' }}>

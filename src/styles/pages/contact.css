@@ -1,6 +1,11 @@
+
+
 .login-container {
+  font-family: 'Cream cake';
+  font-size: 25px;
   max-width: 400px;
-  margin: 30px auto;
+  height: 550px;
+  margin: 20px auto;
   padding: 3rem;
   background-color: #e7c294;
   border-radius: 12px;
@@ -12,4 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.form-title{
+    font-size: 50px !important;
 }

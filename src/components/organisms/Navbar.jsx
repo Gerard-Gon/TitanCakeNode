@@ -3,6 +3,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import '../../styles/organisms/navbar.css';
 import cartIcon from '../../img/cart-icon.png';
 import sesionIcon from '../../img/sesion.webp';
+import React from 'react';
 
 function NavBar() {
   const [cartCount, setCartCount] = useState(0);

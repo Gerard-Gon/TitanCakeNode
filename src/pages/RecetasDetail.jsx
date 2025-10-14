@@ -5,6 +5,7 @@ import Image from '../components/atoms/Image.jsx';
 import Text from '../components/atoms/Text.jsx';
 import rat from '../img/rata.webp';
 import '../styles/organisms/recetasdetails.css'
+import React from 'react';
 
 
 

@@ -4,6 +4,7 @@ import Button from '../atoms/Button';
 import CardBody from '../molecules/CardBody';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/organisms/recetasCard.css';
+import React from 'react';
 
 function RecetasCard({ receta }) {
   const navigate = useNavigate();

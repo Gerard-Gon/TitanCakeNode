@@ -2,6 +2,7 @@ import Card from 'react-bootstrap/Card';
 import Logo from '../../img/Logo.webp'
 import Image from '../atoms/Image'
 import '../../styles/pages/nosotros.css'
+import React from 'react';
 
 function NosotrosCard() {
   return (

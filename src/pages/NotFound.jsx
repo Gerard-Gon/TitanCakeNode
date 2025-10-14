@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import Image from '../components/atoms/Image';
 import '../styles/pages/notfound.css'
+import React from 'react';
 
 const image = {
     src: 'https://media.tenor.com/zGQLL-kwwEoAAAAM/cat-meme-pee.gif',

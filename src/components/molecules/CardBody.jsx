@@ -1,4 +1,5 @@
 import Text from '../atoms/Text';
+import React from 'react';
 
 
 function CardBody({ title, description, price }) {

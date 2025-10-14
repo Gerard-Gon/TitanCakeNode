@@ -1,5 +1,6 @@
 import { LoginForm } from '../components/organisms/LoginForm';
 import '../styles/pages/login.css';
+import React from 'react';
 
 export function LoginPage() {
   return (

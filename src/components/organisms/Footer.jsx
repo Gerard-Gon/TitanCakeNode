@@ -1,5 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import '../../styles/organisms/footer.css';
+import React from 'react';
 
 function Footer() {
   return (

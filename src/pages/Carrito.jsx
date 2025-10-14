@@ -1,5 +1,6 @@
 import { Container } from 'react-bootstrap';
 import CarritoStructure from '../components/organisms/CarritoStructure';
+import React from 'react';
 
 function Carrito() {
   return (

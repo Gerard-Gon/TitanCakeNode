@@ -1,4 +1,5 @@
 import { InputField } from '../atoms/InputField';
+import React from 'react';
 
 export function RegisterFields({
   nombre,

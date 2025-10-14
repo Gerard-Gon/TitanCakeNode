@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RegisterFields } from '../molecules/RegisterFields';
 import { SubmitButton } from '../atoms/SubmitButton';
+import React from 'react';
 
 export function RegisterForm() {
   const [nombre, setNombre] = useState('');

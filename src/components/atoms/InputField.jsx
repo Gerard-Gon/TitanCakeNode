@@ -1,4 +1,5 @@
 import { FormControl } from 'react-bootstrap';
+import React from 'react';
 
 export function InputField({ type, value, onChange, placeholder }) {
   return (

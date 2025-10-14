@@ -2,6 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import RecetasCard from '../components/organisms/RecetasCard';
 import '../styles/pages/products.css';
 import recetas from '../data/recetas';
+import React from 'react';
 
 function Blog() {
 

@@ -11,7 +11,8 @@
 
 }
 .card.marron {
-  width: 240px;
+  width: 100%;           /* Se adapta al contenedor */
+  max-width: 34rem;  
   background-color: #4b2e2e;
   color: #fff;
   border: none;

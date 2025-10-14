@@ -35,7 +35,7 @@ function ProductDetail() {
     <Button variant="info" onClick={() => navigate(`/products`)}>
       Volver
     </Button>
-    <Card style={{ width: '28rem' }} className="m-2 marron">
+    <Card  className="m-2 marron">
       <Image src={product.image} alt={product.name} className="card-img-top-products-detail" />
       <Card.Body className='texto-producto'>
         <CardBody

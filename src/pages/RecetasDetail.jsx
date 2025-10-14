@@ -1,3 +1,4 @@
+import React from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import { useParams,useNavigate } from 'react-router-dom';
 import recetas from '../data/recetas.js';

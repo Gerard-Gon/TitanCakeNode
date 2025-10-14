@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Logo from '../../img/Logo.webp'
 import Image from '../atoms/Image'

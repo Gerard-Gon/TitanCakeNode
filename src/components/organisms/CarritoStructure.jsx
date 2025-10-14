@@ -1,8 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
-
-
 
 function CarritoStructure() {
   const [cart, setCart] = useState([]);
@@ -13,10 +10,10 @@ function CarritoStructure() {
   }, []);
 
   const updateCart = (newCart) => {
-  setCart(newCart);
-  localStorage.setItem('cart', JSON.stringify(newCart));
-  window.dispatchEvent(new Event("cartUpdated")); 
-};
+    setCart(newCart);
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    window.dispatchEvent(new Event('cartUpdated'));
+  };
 
   const increment = (id) => {
     const newCart = cart.map(item =>
@@ -38,21 +35,32 @@ function CarritoStructure() {
     const newCart = cart.filter(item => item.id !== id);
     updateCart(newCart);
   };
-  
+
+  const handlePagar = () => {
+    alert('¡Gracias por su compra!');
+    updateCart([]);
+    localStorage.removeItem('cart');
+  };
+
+  const handleVaciar = () => {
+    alert('Se eliminaron todos los productos del carrito');
+    updateCart([]);
+    localStorage.removeItem('cart');
+  };
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="container mt-4 centrador">
+    <div className="container mt-4 centrador" data-testid="carrito-container">
       <h1>Carrito de Compras</h1>
       <br />
       <h2>Resumen de tu pedido: </h2>
       <br />
       {cart.length === 0 ? (
-        <p>Tu carrito está vacío.</p>
+        <p data-testid="carrito-vacio">Tu carrito está vacío.</p>
       ) : (
         <>
-          <Table striped bordered hover>
+          <Table striped bordered hover data-testid="tabla-carrito">
             <thead>
               <tr>
                 <th>Producto</th>
@@ -78,25 +86,21 @@ function CarritoStructure() {
               ))}
             </tbody>
           </Table>
-            <Button variant="success" onClick={() => {alert('¡Gracias por su compra!'); 
-            localStorage.removeItem('cart'); 
-            window.location.reload(); 
-            }}
-            >
+
+          <div className="d-flex gap-2 mb-3">
+            <Button variant="success" onClick={handlePagar} data-testid="btn-pagar">
               Pagar
             </Button>
-            <Button variant="danger" onClick={() => {alert('Se eliminaron todos los productos del carrito'); 
-            localStorage.removeItem('cart'); 
-            window.location.reload(); 
-            }}
-            >
+            <Button variant="danger" onClick={handleVaciar} data-testid="btn-vaciar">
               Eliminar todo
             </Button>
-          
-          <h4>Total: ${total}</h4>
+          </div>
+
+          <h4 data-testid="total-carrito">Total: ${total.toLocaleString('es-CL')}</h4>
         </>
       )}
     </div>
   );
 }
+
 export default CarritoStructure;

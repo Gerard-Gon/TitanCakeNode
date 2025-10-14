@@ -1,10 +1,11 @@
+import React from 'react';
 import { InputField } from '../atoms/InputField';
 
 export function LoginFields({ username, setUsername, password, setPassword }) {
   return (
     <>
       <InputField
-        type="text"
+        type="email"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Correo Electronico"

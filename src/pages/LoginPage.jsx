@@ -1,3 +1,4 @@
+import React from 'react';
 import { LoginForm } from '../components/organisms/LoginForm';
 import '../styles/pages/login.css';
 

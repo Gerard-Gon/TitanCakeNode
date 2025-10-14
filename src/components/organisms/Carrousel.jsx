@@ -7,7 +7,6 @@ import Foto3 from '../../img/dulce1.webp';
 import { Container } from 'react-bootstrap';
 import '../../styles/pages/home.css';
 
- 
 function Carrousel() {
   return (
     <div className="centrador" data-testid="carrousel">

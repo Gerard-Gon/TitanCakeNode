@@ -1,3 +1,4 @@
+import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import RecetasCard from '../components/organisms/RecetasCard';
 import '../styles/pages/products.css';

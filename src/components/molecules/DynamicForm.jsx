@@ -4,14 +4,14 @@ import { Form } from 'react-bootstrap';
 
 function DynamicForm({inputs = []}) {
     return (
-        <Form>
+        <Form data-testid="dynamic-form">
             {inputs.map((input, index) => (
-                <Form.Group key={input.id || index} controlId={`input-${input.id || index}`}>
-                    {input.label && <Form.Label>{input.label}</Form.Label>}
-                    <Input {...input} />
+                <Form.Group key={input.id || index}>
+                    {input.label && <Form.Label htmlFor={`input-${input.id || index}`}>{input.label}</Form.Label>}
+                    <Input id={`input-${input.id || index}`} {...input} />
                     {input.error && <Form.Text className="text-danger">{input.error}</Form.Text>}
                 </Form.Group>
-            ))}
+        ))}
         </Form>
     )
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import NosotrosCard from '../components/organisms/NosotrosCard';
 
 function Nosotros() {

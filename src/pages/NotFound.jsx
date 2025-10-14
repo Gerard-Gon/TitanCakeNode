@@ -12,7 +12,7 @@ function NotFound() {
   return (
     <Container className="my-5">
       <h2 className='titulo'>PAGINA NO ENCONTRADA<br/> ALERT!!</h2>
-      <p className='texto'>NANOMACHINES SON</p>
+      <p className='texto'>SE VIENE LA MIEL</p>
       <Image src={image.src} alt={image.alt} className="" />
     </Container>
   );

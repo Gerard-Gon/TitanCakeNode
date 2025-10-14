@@ -46,7 +46,6 @@ describe('ExampleCarouselImage Component', () => {
     expect(img.style.objectFit).toBe('contain');
     expect(img.style.display).toBe('block');
 
-    // Comparación flexible para evitar errores por '0px auto' vs '0 auto'
     expect(img.style.marginLeft).toBe('auto');
     expect(img.style.marginRight).toBe('auto');
     expect(img.style.marginTop).toBe('0px');

@@ -21,11 +21,10 @@ describe('Home Page', () => {
   it('renderiza las imágenes del carrusel', () => {
   render(<Home />);
   const images = screen.getAllByRole('img');
-  expect(images.length).toBeGreaterThan(0); // al menos una imagen
+  expect(images.length).toBeGreaterThan(0); 
 
   images.forEach(img => {
-    expect(img).not.toBeNull(); // el elemento existe
-    // Verifica que tenga atributo src aunque esté vacío
+    expect(img).not.toBeNull(); 
     expect(img.getAttribute('src')).not.toBeUndefined();
     expect(img.getAttribute('alt')).not.toBeUndefined();
   });

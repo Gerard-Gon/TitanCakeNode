@@ -13,11 +13,5 @@ describe('RegisterPage component', () => {
 
     expect(screen.getByText('Regístrate en TitanCake')).toBeTruthy();
 
-    // Si RegisterForm tiene contenido visible como un campo o botón, verifica eso:
-    // Por ejemplo, si muestra "Nombre" como label:
-    // expect(screen.getByLabelText('Nombre')).toBeTruthy();
-
-    // O si agregas data-testid en RegisterForm:
-    // expect(screen.getByTestId('register-form')).toBeTruthy();
   });
 });

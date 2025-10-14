@@ -84,7 +84,7 @@ describe('RegisterForm component', () => {
       target: { value: 'oscar@duoc.cl' },
     });
     fireEvent.change(screen.getByPlaceholderText(/Contraseña/i), {
-      target: { value: 'pastelito' }, // no mayúscula ni número
+      target: { value: 'pastelito' }, 
     });
 
     fireEvent.click(screen.getByText('Crear cuenta'));

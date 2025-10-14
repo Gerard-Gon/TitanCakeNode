@@ -35,7 +35,7 @@ function RecetasDetail() {
     <Button variant="info" onClick={() => navigate(`/Blog`)}>
         Volver
     </Button>      
-    <Card style={{ width: '40rem' }} className="m-2 marron">
+    <Card className="m-2 marron">
       <Image src={recetaSeleccionada.image} alt={recetaSeleccionada.name} className="card-img-top-details" />
       <Card.Body>
           <Text variant="h2">{recetaSeleccionada.name}</Text>

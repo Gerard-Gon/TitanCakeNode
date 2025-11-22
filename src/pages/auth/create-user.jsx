@@ -1,12 +1,15 @@
+// src/pages/auth/create-user.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Forms from '../../components/templates/Forms';
 import { generarMensaje } from '../../utils/GenerarMensaje';
 import UserService from '../../services/UserService';
+import "../../styles/pages/login.css"; // Importamos los mismos estilos del login
 
 const CreateUser = () => {
-    const [form, setForm] = useState({ nombre:"" ,correo: "", contrasena: "" });
+    const [form, setForm] = useState({ nombre: "", correo: "", contrasena: "" });
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,7 +17,7 @@ const CreateUser = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!form.correo || !form.contrasena) {
+        if (!form.correo || !form.contrasena || !form.nombre) {
             generarMensaje('Completa todos los campos', 'warning');
             return;
         }
@@ -27,20 +30,19 @@ const CreateUser = () => {
                 "correo": form.correo,
                 "contrasena": form.contrasena,
                 rol: {
-                    "id": 3
+                    "id": 3 // Rol de usuario por defecto
                 }
             }
-            const response = await UserService.createUser(usuario);
+            await UserService.createUser(usuario);
 
-            generarMensaje('usuario creado!', 'success');
+            generarMensaje('¡Usuario creado con éxito!', 'success');
 
-            // Redirigir al dashboard
-            /*setTimeout(() => {
-                navigate('/dashboard');
-            }, 800);*/
+            // Redirigir al login después de un breve momento
+            setTimeout(() => {
+                navigate('/login');
+            }, 1500);
 
         } catch (error) {
-            // ERRORES
             const msg = error.response?.data?.message || 'Error al crear usuario';
             generarMensaje(msg, 'error');
         } finally {
@@ -48,14 +50,20 @@ const CreateUser = () => {
         }
     };
 
-    const Login = [
+    // Configuración del formulario con el diseño TitanCake
+    const registerData = [
         {
             type: "text",
             text: [
                 {
-                    content: "Crear usuario",
+                    content: "Crear Cuenta",
                     variant: "h1",
-                    className: "text-center text-4xl font-medium mb-10 text-white",
+                    className: "text-center form-title", // Título con fuente Cream Cake
+                },
+                {
+                    content: "Únete a la familia TitanCake",
+                    variant: "p",
+                    className: "text-center mb-4 opacity-75",
                 }
             ]
         },
@@ -64,13 +72,13 @@ const CreateUser = () => {
             inputs: [
                 {
                     type: "text",
-                    placeholder: "Nombre usuario",
+                    placeholder: "Nombre de usuario",
                     name: "nombre",
                     value: form.nombre,
                     onChange: handleChange,
                     required: true,
                     autoComplete: "off",
-                    className: "w-full border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500 mb-4",
+                    className: "w-full login-input mb-3", // Input estilo beige
                 },
                 {
                     type: "email",
@@ -80,7 +88,7 @@ const CreateUser = () => {
                     onChange: handleChange,
                     required: true,
                     autoComplete: "off",
-                    className: "w-full border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500 mb-4",
+                    className: "w-full login-input mb-3",
                 },
                 {
                     type: "password",
@@ -89,44 +97,49 @@ const CreateUser = () => {
                     value: form.contrasena,
                     onChange: handleChange,
                     required: true,
-                    autoComplete: "current-password",
-                    className: "w-full border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500",
+                    autoComplete: "new-password",
+                    className: "w-full login-input",
                 },
             ],
-            className: "space-y-8"
+            className: "space-y-4"
         },
         {           
             type: "button",
-            text: "Crear usuario",
-            className: "transform w-full mt-4 mb-4 rounded-sm bg-indigo-600 py-2 font-bold duration-300 hover:bg-indigo-400"
+            text: loading ? "Registrando..." : "Registrarse",
+            className: "w-full mt-4 mb-3 login-btn", // Botón estilo TitanCake
+            disabled: loading
         },
         {
-      type: "text",
-      text: [
-        {
-          content: (
-            <Link
-              to="/login"
-              className="text-indigo-400 hover:text-indigo-300 underline transition"
-            >
-              Ya tengo un usuario
-            </Link>
-          ),
-          variant: "p",
-          className: "text-center text-lg",
+            type: "text",
+            text: [
+                {
+                    content: (
+                        <span className="login-text">
+                            ¿Ya tienes cuenta?
+                            <Link
+                                to="/login"
+                                className="login-link"
+                            >
+                                Inicia sesión aquí
+                            </Link>
+                        </span>
+                    ),
+                    variant: "div",
+                    className: "text-center mt-3",
+                },
+            ],
         },
-      ],
-    },
     ];
+
     return (
-        <>
-            <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-orange-800 p-4">
-                <form onSubmit={handleSubmit} className="w-full max-w-md space-y-10 rounded-2xl bg-white/10 p-10 backdrop-blur-xl shadow-2xl">
-                    <Forms content={Login} />
+        <div className="login-wrapper"> {/* Centrador vertical y fondo */}
+            <div className="login-container"> {/* Tarjeta marrón */}
+                <form onSubmit={handleSubmit}>
+                    <Forms content={registerData} />
                 </form>
-            </main>
-        </>
+            </div>
+        </div>
     );
 };
 
-export default CreateUser;   
+export default CreateUser;

@@ -14,8 +14,8 @@ const HomeProductos = lazy(() => import('../pages/admin/Productos/HomeProductos'
 const publicRoutes = [
   { path: '/', element: <Home />, showNavbar: true },
   { path: '/home', element: <Home />, showNavbar: true },
-  { path: '/login', element: <LoginPage />, showNavbar: false },
-  { path: '/create-user', element: <CreateUser />, showNavbar: false },
+  { path: '/login', element: <LoginPage />, showNavbar: true },
+  { path: '/create-user', element: <CreateUser />, showNavbar: true},
   { path: '/products', element: <Products />, showNavbar: true},
   { path: '/carrito', element: <Carrito />, showNavbar: true},
   { path: '/contacto', element: <Contact />, showNavbar: true},

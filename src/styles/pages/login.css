@@ -1,15 +1,121 @@
-.login-container {
-  max-width: 400px;
-  margin: 30px auto;
-  padding: 3rem;
-  background-color: #e7c294;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+/* src/styles/pages/login.css */
 
 .login-wrapper {
-  min-height: 20vh;
+  min-height: 85vh; /* Ocupa más altura para centrarlo mejor */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem;
+  background-color: #4b2e2e; /* Marrón chocolate de TitanCake */
+  color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Sombra más elegante */
+  border: 2px solid #663300; /* Borde sutil más oscuro */
+}
+
+.form-title {
+  font-family: 'Cream Cake', sans-serif;
+  font-size: 4rem !important; /* Título grande y llamativo */
+  color: #D7BFAE; /* Beige crema para destacar */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.5rem !important;
+}
+
+/* Estilos para los inputs (Cajas de texto) */
+.login-input {
+  background-color: #fffbf5 !important; /* Fondo casi blanco cálido */
+  border: 2px solid #D7BFAE !important;
+  color: #3e2723 !important; /* Texto café oscuro */
+  font-weight: 500;
+  padding: 12px 15px !important;
+  border-radius: 8px !important;
+}
+
+.login-input::placeholder {
+  color: #8d6e63 !important;
+  font-style: italic;
+}
+
+.login-input:focus {
+  box-shadow: 0 0 0 4px rgba(215, 191, 174, 0.4) !important; /* Resplandor beige */
+  outline: none !important;
+  border-color: #ffffff !important;
+}
+
+/* Estilo para el botón de ingresar */
+.login-btn {
+  background-color: #D7BFAE !important; /* Fondo beige */
+  color: #4b2e2e !important; /* Texto marrón */
+  font-family: 'Cream Cake', sans-serif;
+  font-size: 2rem !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 5px 0 !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.login-btn:hover {
+  background-color: #ffffff !important;
+  transform: scale(1.05); /* Efecto de crecimiento al pasar el mouse */
+  color: #663300 !important;
+}
+
+/* Estilos para el enlace de registro */
+.login-text {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+}
+
+.login-link {
+  color: #D7BFAE !important;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 5px;
+  transition: color 0.2s;
+}
+
+.login-link:hover {
+  color: #ffffff !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* EL PADRE: Se encarga de centrar la tarjeta en la pantalla */
+.login-wrapper {
+  width: 100%;
+  /* Restamos un poco para compensar el Navbar/Footer si es necesario, 
+     o usamos 85vh para asegurar que se vea centrado visualmente */
+  min-height: 85vh; 
+  display: flex;
+  justify-content: center; /* Centrado Horizontal */
+  align-items: center;     /* Centrado Vertical */
+  padding: 20px;           /* Evita que toque los bordes en móviles */
+}
+
+/* LA TARJETA: Diseño visual del cuadro de login */
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem;
+  background-color: #4b2e2e;
+  color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 2px solid #663300;
+  /* Ya no necesita 'margin: auto' ni 'centrador' porque el padre lo centra */
+}
+
+/* ... (Mantén aquí el resto de estilos para .form-title, .login-input, etc. que te pasé antes) ... */
+.form-title {
+  font-family: 'Cream Cake', sans-serif;
+  font-size: 4rem !important;
+  color: #D7BFAE;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1.5rem !important;
 }

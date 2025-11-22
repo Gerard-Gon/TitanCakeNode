@@ -1,11 +1,19 @@
+// src/pages/auth/data/loginData.jsx
+import React from 'react'; // Necesario para usar JSX en la propiedad content
+
 const loginData = [
     {
         type: "text",
         text: [
             {
-                content: "Inicio de Sesión",
+                content: "TitanCake",
                 variant: "h1",
-                className: "text-center text-4xl font-medium mb-10 text-white",
+                className: "text-center form-title", // Usa la nueva clase con fuente Cream Cake
+            },
+            {
+                content: "Inicia sesión para continuar",
+                variant: "p",
+                className: "text-center mb-4 text-white opacity-75",
             }
         ]
     },
@@ -18,7 +26,8 @@ const loginData = [
                 name: "correo",
                 required: true,
                 autoComplete: "off",
-                className: "w-full border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500 mb-4",
+                // Eliminamos bordes e indigo, usamos nuestra clase login-input
+                className: "w-full login-input mb-3", 
             },
             {
                 type: "password",
@@ -26,31 +35,35 @@ const loginData = [
                 name: "contrasena",
                 required: true,
                 autoComplete: "current-password",
-                className: "w-full border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500",
+                className: "w-full login-input",
             },
         ],
-        className: "space-y-8"
+        className: "space-y-4"
     },
     {           
         type: "button",
-        text: "Iniciar Sesión",
-        className: "transform w-full mt-4 mb-4 rounded-sm py-2 font-bold duration-300 bg-indigo-600 hover:bg-indigo-400",
+        text: "Ingresar",
+        // Botón grande y personalizado
+        className: "w-full mt-4 mb-3 login-btn", 
     },
     {
         type: "text",
         text: [
             {
                 content: (
-                    <button
-                        type="button"
-                        onClick={() => window.location.href = '/create-user'} 
-                        className="text-indigo-400 hover:text-indigo-300 underline transition"
-                    >
-                        Crear usuario
-                    </button>
+                    <span className="login-text">
+                        ¿No tienes cuenta? 
+                        <button
+                            type="button"
+                            onClick={() => window.location.href = '/create-user'} 
+                            className="login-link bg-transparent border-0 p-0 inline-block"
+                        >
+                            Regístrate aquí
+                        </button>
+                    </span>
                 ),
-                variant: "p",
-                className: "text-center text-lg",
+                variant: "div",
+                className: "text-center mt-3",
             },
         ],
     },

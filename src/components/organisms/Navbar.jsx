@@ -35,8 +35,6 @@ function NavBar() {
           <Nav className="me-auto">
             <Nav.Link href="/">Inicio</Nav.Link>
             <Nav.Link href="/products">Productos</Nav.Link>
-            <Nav.Link href="/nosotros">Sobre Nosotros</Nav.Link>
-            <Nav.Link href="/blog">Blog</Nav.Link>
             <Nav.Link href="/contact">Contacto</Nav.Link>
           </Nav>
           <Nav className="ms-auto align-items-center gap-3"> {/* Agrupado y alineado a la derecha */}
@@ -73,7 +71,7 @@ function NavBar() {
               />
             </Nav.Link>
 
-            <Nav.Link href="/register" className="me-auto">
+            <Nav.Link href="/create-user" className="me-auto">
               Registrar Cuenta
             </Nav.Link>
           </Nav>

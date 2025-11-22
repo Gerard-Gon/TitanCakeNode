@@ -2,22 +2,29 @@ import { lazy } from 'react';
 
 // Lazy loading hace que cargue las páginas solo cuando se necesitan
 const Home = lazy(() => import('../pages/user/Home'));
-const Login = lazy(() => import('../pages/auth/login'));
+const Products = lazy(() => import('../pages/user/Products'));
+const Carrito = lazy(() => import('../pages/user/Carrito'));
+const Contact = lazy(() => import('../pages/user/Contact'));
+const LoginPage = lazy(() => import('../pages/auth/LoginPage'));
 const CreateUser = lazy(() => import('../pages/auth/create-user'));
 const HomeAdmin = lazy(() => import('../pages/admin/HomeAdmin'));
-const HomeFacciones = lazy(() => import('../pages/admin/Facciones/HomeFacciones'));
+const HomeProductos = lazy(() => import('../pages/admin/Productos/HomeProductos'));
 
 // Rutas públicas o del usuario, así están mejor organizadas
 const publicRoutes = [
   { path: '/', element: <Home />, showNavbar: true },
-  { path: '/login', element: <Login />, showNavbar: false },
+  { path: '/home', element: <Home />, showNavbar: true },
+  { path: '/login', element: <LoginPage />, showNavbar: false },
   { path: '/create-user', element: <CreateUser />, showNavbar: false },
+  { path: '/products', element: <Products />, showNavbar: true},
+  { path: '/carrito', element: <Carrito />, showNavbar: true},
+  { path: '/contacto', element: <Contact />, showNavbar: true},
 ];
 
 // Rutas del administrador 
 const adminRoutes = [
-  { path: '/admin/dashboard', element: <HomeAdmin />, isAdmin: true },
-  { path: '/admin/facciones', element: <HomeFacciones />, isAdmin: true },
+  { path: '/admin/HomeAdmin', element: <HomeAdmin />, isAdmin: true },
+  { path: '/admin/productos', element: <HomeProductos />, isAdmin: true },
 ];
 
 // Ruta 404 por ahora no hice una página específica, solo un div simple (por ahora (puede cambiar (o eso creo)))

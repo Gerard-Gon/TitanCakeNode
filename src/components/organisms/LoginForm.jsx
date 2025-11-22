@@ -1,48 +1,127 @@
-import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { LoginFields } from '../molecules/LoginFields';
-import { SubmitButton } from '../atoms/SubmitButton';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Forms from "../../components/templates/Forms"; // componente que renderiza loginData
+import { generarMensaje } from "../../utils/GenerarMensaje";
+import UserService from "../../services/UserService";
+import { useAuth } from "../../context/AuthContext";
+import loginData from "../../pages/auth/data/loginData";
 
 export function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // Estado del formulario
+  const [form, setForm] = useState({ correo: "", contrasena: "" });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth(); // contexto de autenticación
 
-  const handleSubmit = (e) => {
+  // Maneja cambios en los inputs
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  // Maneja el envío del formulario
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Obtener datos del usuario registrado
-    const usuarioGuardado = JSON.parse(localStorage.getItem('usuarioTitanCake'));
-
-    if (!usuarioGuardado) {
-      alert('No hay ninguna cuenta registrada. Por favor regístrate primero.');
+    // Validación básica
+    if (!form.correo || !form.contrasena) {
+      generarMensaje("Completa todos los campos", "warning");
       return;
     }
 
-    // Validar credenciales
-    if (
-      username === usuarioGuardado.correo &&
-      password === usuarioGuardado.contraseña
-    ) {
-      alert(`¡Bienvenido de nuevo, ${usuarioGuardado.nombre}!`);
-      console.log('Login exitoso:', usuarioGuardado);
-      navigate('/'); // Aquí podrías redirigir al usuario o mostrar contenido exclusivo
-    } else {
-      alert('Correo o contraseña incorrectos. Intenta nuevamente.');
+    setLoading(true);
+
+    try {
+      // Llamada al servicio de login
+      const response = await UserService.login(form);
+      const usuario = response.data; // usuario completo desde el backend
+
+      // Guardar usuario en localStorage (sin token)
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: usuario.id,
+          nombre: usuario.nombre,
+          rol: usuario.rol,
+        })
+      );
+
+      // Guardar usuario en el contexto global
+      login({
+        id: usuario.id,
+        nombre: usuario.nombre,
+        rol: usuario.rol,
+      });
+
+      generarMensaje(`¡Bienvenido ${usuario.nombre}!`, "success");
+
+      // Redirección según rol
+      setTimeout(() => {
+        if (usuario.rol.id === 1 || usuario.rol.id === 2) {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/");
+        }
+      }, 1500);
+    } catch (error) {
+      const msg = error.response?.data || "Credenciales inválidas";
+      generarMensaje(msg, "error");
+    } finally {
+      setLoading(false);
+      setForm({ correo: "", contrasena: "" }); // limpiar formulario
     }
   };
 
+  // Adaptar loginData con handlers y valores dinámicos
+  const formDataWithHandlers = loginData.map((item, index) => {
+    if (item.type === "inputs") {
+      return {
+        ...item,
+        inputs: item.inputs.map((input) => ({
+          ...input,
+          value: form[input.name] || "",
+          onChange: handleChange,
+        })),
+      };
+    }
+
+    if (item.type === "button") {
+      return {
+        ...item,
+        key: index,
+        onClick: handleSubmit,
+        disabled: loading,
+        text: loading ? "Iniciando..." : item.text,
+      };
+    }
+
+    if (item.type === "text" && item.text[0].content.type === "button") {
+      // Ajustar el botón "Crear usuario" para usar navigate
+      return {
+        ...item,
+        key: index,
+        text: [
+          {
+            ...item.text[0],
+            content: (
+              <button
+                type="button"
+                onClick={() => navigate("/create-user")}
+                className="text-indigo-400 hover:text-indigo-300 underline transition"
+              >
+                Crear usuario
+              </button>
+            ),
+          },
+        ],
+      };
+    }
+
+    return { ...item, key: index };
+  });
+
   return (
-    <form onSubmit={handleSubmit}>
-      <LoginFields
-        username={username}
-        setUsername={setUsername}
-        password={password}
-        setPassword={setPassword}
-      />
-      <SubmitButton label="Iniciar sesión" />
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <Forms content={formDataWithHandlers} />
     </form>
   );
 }
-

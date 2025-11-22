@@ -5,7 +5,7 @@ function DynamicTexts({ Texts = [] }) {
     return (
         <>
             {Texts.map((text) => (
-                <Text key={text.id} variant={text.variant} className={text.className}>
+                <Text key={text.id || index} variant={text.variant} className={text.className}>
                     {text.content}
                 </Text> 
             ))}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Input({ id, className = "", type = "text", ...props }) {
   const componentProps = {

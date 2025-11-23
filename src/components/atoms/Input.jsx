@@ -14,7 +14,18 @@ export default function Input({
   disabled = false,
   ...props
 }) {
-  // Si es textarea, usamos Form.Control con `as="textarea"`
+  // Definimos las clases base para mantener el código limpio y evitar repetición
+  const baseClasses = `
+    w-full px-4 py-2.5 text-sm text-gray-900
+    border border-gray-300 rounded-lg
+    focus:ring-2 focus:ring-blue-500 focus:border-transparent
+    outline-none transition-all
+    placeholder:text-gray-400
+    ${disabled ? "bg-gray-50 cursor-not-allowed text-gray-500" : ""}
+    ${className}
+  `.replace(/\s+/g, ' ').trim(); // Limpia saltos de línea y espacios extra
+
+  // Renderizado para Textarea
   if (type === "textarea") {
     return (
       <Form.Control
@@ -26,18 +37,13 @@ export default function Input({
         required={required}
         autoComplete={autoComplete}
         disabled={disabled}
-        className={`w-full px-4 py-2.5 text-sm text-gray-900
-                    border border-gray-300 rounded-lg
-                    focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                    outline-none transition-all resize-none
-                    placeholder:text-gray-400
-                    ${disabled ? "bg-gray-50 cursor-not-allowed text-gray-500" : ""} ${className}`}
+        className={`${baseClasses} resize-none`}
         {...props}
       />
     );
   }
 
-  // Si es input normal
+  // Renderizado para Input normal
   return (
     <Form.Control
       type={type}
@@ -48,12 +54,7 @@ export default function Input({
       required={required}
       autoComplete={autoComplete}
       disabled={disabled}
-      className={`w-full px-4 py-2.5 text-sm text-gray-900
-                  border border-gray-300 rounded-lg
-                  focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                  outline-none transition-all
-                  placeholder:text-gray-400
-                  ${disabled ? "bg-gray-50 cursor-not-allowed text-gray-500" : ""} ${className}`}
+      className={baseClasses}
       {...props}
     />
   );

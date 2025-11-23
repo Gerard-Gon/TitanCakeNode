@@ -1,0 +1,205 @@
+/* src/styles/pages/admin.css */
+
+/* --- Estilos Generales del Admin --- */
+.titan-page-bg {
+    background-color: #fffbf5; /* Beige claro */
+    min-height: 100vh;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.titan-spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.titan-spinner {
+    color: #4b2e2e; /* Marrón */
+    width: 4rem;
+    height: 4rem;
+}
+
+/* Botón "Crear" flotante */
+.titan-btn-create {
+    width: auto !important;
+    font-size: 28px !important;
+    padding: 0.5rem 1.5rem !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* --- Estilos de la Tabla --- */
+.titan-table-container {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: 2px solid #4b2e2e;
+}
+
+.titan-table-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #4b2e2e;
+}
+
+.titan-table-name {
+    font-family: 'Cream Cake', cursive;
+    font-size: 24px;
+    color: #212529;
+}
+
+.titan-table-price {
+    font-weight: bold;
+    color: #212529;
+}
+
+/* --- Estilos del Modal (CreateModal) --- */
+.titan-modal-header {
+    background-color: #4b2e2e; /* Marrón */
+    border-bottom: 2px solid #D7BFAE; /* Dorado/Beige */
+}
+
+.titan-modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%); /* Hace la X blanca */
+}
+
+.titan-modal-title {
+    font-family: 'Cream Cake', cursive;
+    color: #D7BFAE;
+    font-size: 35px;
+}
+
+.titan-modal-body {
+    background-color: #fffbf5; /* Beige fondo */
+}
+
+.titan-label {
+    font-weight: bold;
+    color: #4b2e2e;
+    margin-bottom: 0.5rem;
+}
+
+.titan-input-custom {
+    background-color: white !important;
+    border: 1px solid #4b2e2e !important;
+    color: #333 !important;
+}
+
+.titan-input-custom:focus {
+    box-shadow: 0 0 0 0.25rem rgba(75, 46, 46, 0.25) !important;
+}
+
+.titan-modal-footer {
+    background-color: #fffbf5;
+    border-top: 2px solid #4b2e2e;
+}
+
+.titan-btn-submit {
+    background-color: #4b2e2e !important;
+    border-color: #4b2e2e !important;
+    color: white !important;
+}
+
+.titan-btn-submit:hover {
+    background-color: #3a2323 !important;
+}
+
+/* --- Estilos del InputFile (Drag & Drop) --- */
+.titan-dropzone-container {
+    position: relative;
+    width: 100%;
+    min-height: 150px;
+    border: 2px dashed #4b2e2e; /* Borde inactivo */
+    background-color: #fffbf5;  /* Fondo inactivo */
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    padding: 20px;
+}
+
+.titan-dropzone-container.dragging {
+    border-color: #d32f2f; /* Rojo al arrastrar */
+    background-color: #efebe9; /* Fondo más oscuro */
+    transform: scale(1.02);
+}
+
+.titan-dropzone-container.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.titan-file-input-hidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: inherit;
+    z-index: 10;
+}
+
+.titan-dropzone-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    stroke: #4b2e2e;
+}
+
+.titan-dropzone-text {
+    margin: 0;
+    font-weight: bold;
+    color: #4b2e2e;
+    font-size: 1.1rem;
+}
+
+.titan-dropzone-subtext {
+    margin: 5px 0 0 0;
+    font-size: 0.85rem;
+    color: #8d6e63;
+}
+
+/* Preview de Imagen */
+.titan-preview-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.titan-preview-box {
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #4b2e2e;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.titan-preview-img {
+    max-height: 200px;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.titan-btn-change {
+    margin-top: 10px;
+    background: #4b2e2e;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+}
+
+.titan-btn-change:hover {
+    background: #3a2323;
+}

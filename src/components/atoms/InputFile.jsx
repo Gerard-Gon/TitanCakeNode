@@ -1,32 +1,102 @@
-// src/components/atoms/Input.jsx
-import React from "react";
+// src/components/atoms/InputFile.jsx
+import React, { useState, useRef } from 'react';
+// Importamos el CSS general del admin
+import '../../styles/pages/admin.css';
 
-const Input = ({ type = "text", placeholder = "", name = "", value = "", onChange = () => { }, required = false, autoComplete = "", className = "",disabled = false, ...props  }) => {
-    if (type === "textarea") {
+function InputFile({ onChange, accept = "image/*", className = "", disabled = false, preview = null }) {
+    const [isDragging, setIsDragging] = useState(false);
+    const inputRef = useRef(null);
+
+    // --- Manejadores de Drag & Drop ---
+    const handleDragEnter = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!disabled) setIsDragging(true);
+    };
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragging(false);
+    };
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsDragging(false);
+        if (disabled) return;
+        
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+            onChange({ target: { files: files, name: 'imageUrl' } });
+        }
+    };
+
+    // --- Vista Previa ---
+    if (preview) {
         return (
-            <textarea name={name} value={value} onChange={onChange} placeholder={placeholder} required={required} autoComplete={autoComplete} disabled={disabled}
-                className={`w-full px-4 py-2.5 text-sm text-gray-900
-                            border border-gray-300 rounded-lg
-                            focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                            outline-none transition-all resize-none
-                            placeholder:text-gray-400
-                            ${disabled ? "bg-gray-50 cursor-not-allowed text-gray-500" : ""} ${className} `}
-                {...props}
-            />
+            <div className={`titan-preview-wrapper ${className}`}>
+                <div className="titan-preview-box">
+                    <img src={preview} alt="Vista previa" className="titan-preview-img" />
+                    {!disabled && (
+                        <button
+                            type="button"
+                            onClick={() => inputRef.current.click()}
+                            className="titan-btn-change"
+                        >
+                            Cambiar Imagen
+                        </button>
+                    )}
+                </div>
+                <input 
+                    type="file" 
+                    accept={accept} 
+                    ref={inputRef} 
+                    onChange={onChange} 
+                    style={{ display: 'none' }} 
+                />
+            </div>
         );
     }
 
+    // --- Zona de Drop ---
     return (
-        <input type={type} name={name} value={value} onChange={onChange} placeholder={placeholder} required={required} autoComplete={autoComplete}disabled={disabled}
-            className={`w-full px-4 py-2.5 text-sm text-gray-900
-                        border border-gray-300 rounded-lg
-                        focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                        outline-none transition-all
-                        placeholder:text-gray-400
-                        ${disabled ? "bg-gray-50 cursor-not-allowed text-gray-500" : ""} ${className} `}
-            {...props}
-        />
-    );
-};
+        <div className={className} style={{ width: '100%' }}>
+            <div 
+                className={`titan-dropzone-container ${isDragging ? 'dragging' : ''} ${disabled ? 'disabled' : ''}`}
+                onDragEnter={handleDragEnter}
+                onDragLeave={handleDragLeave}
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
+            >
+                {/* Input Invisible */}
+                <input 
+                    type="file" 
+                    accept={accept} 
+                    onChange={onChange} 
+                    disabled={disabled} 
+                    ref={inputRef} 
+                    className="titan-file-input-hidden"
+                />
 
-export default Input;
+                {/* Contenido Visual (Icono SVG) */}
+                <svg className="titan-dropzone-icon" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                
+                <p className="titan-dropzone-text">
+                    {disabled ? "Subiendo..." : "Haz click o arrastra tu imagen aquí"}
+                </p>
+                <p className="titan-dropzone-subtext">
+                    (Soporta JPG, PNG, WEBP)
+                </p>
+            </div>
+        </div>
+    );
+}
+
+export default InputFile;

@@ -1,15 +1,20 @@
+// src/pages/admin/Productos/ProductForm.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 import ProductosService from '../../../services/ProductService';
 import { generarMensaje } from '../../../utils/GenerarMensaje';
 import Input from '../../../components/atoms/Input';
 import Button from '../../../components/atoms/Button';
-import InputFile from '../../../components/atoms/InputFile'; // Asegúrate de tener este componente
-import { uploadToImgBB } from '../../../utils/uploadImage'; // Tu utilidad de subida
+import InputFile from '../../../components/atoms/InputFile'; 
+import { uploadToImgBB } from '../../../utils/uploadImage';
+
+// Reutilizamos LOS MISMOS estilos del login para mantener la esencia
+import '../../../styles/pages/login.css'; 
 
 function ProductForm() {
     const navigate = useNavigate();
-    const { id } = useParams(); // Si hay ID, es edición. Si no, es creación.
+    const { id } = useParams();
     const isEditing = !!id;
 
     const [formData, setFormData] = useState({
@@ -20,16 +25,16 @@ function ProductForm() {
         imageUrl: ''
     });
     const [loading, setLoading] = useState(false);
-    const [imagePreview, setImagePreview] = useState(null);
-    const [uploadingImage, setUploadingImage] = useState(false);
+    const [uploading, setUploading] = useState(false); // Estado para la subida de imagen
+    const [preview, setPreview] = useState(null);
 
-    // Cargar datos si estamos editando
+    // Cargar datos si es edición
     useEffect(() => {
         if (isEditing) {
             setLoading(true);
             ProductosService.getProductoById(id)
-                .then(response => {
-                    const prod = response.data;
+                .then(res => {
+                    const prod = res.data;
                     setFormData({
                         nombreProducto: prod.nombreProducto,
                         descripcionProducto: prod.descripcionProducto,
@@ -37,11 +42,10 @@ function ProductForm() {
                         stock: prod.stock,
                         imageUrl: prod.imageUrl
                     });
-                    setImagePreview(prod.imageUrl);
+                    setPreview(prod.imageUrl);
                 })
-                .catch(error => {
-                    console.error(error);
-                    generarMensaje("Error al cargar el producto", "error");
+                .catch(err => {
+                    generarMensaje("Error cargando el pastel", "error");
                     navigate('/admin/productos');
                 })
                 .finally(() => setLoading(false));
@@ -52,122 +56,145 @@ function ProductForm() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleImageChange = async (e) => {
-    const file = e.target.files[0]; // 1. Agarra el archivo
-    setUploadingImage(true);        // 2. Bloquea el botón de guardar (para que no envíen sin terminar)
+    // Lógica de subida de imagen usando tu util
+    const handleImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if(!file) return;
 
-    try {
-         // 3. Llama a la utilidad del Paso 4
-        const { url, preview } = await uploadToImgBB(file);
-
-        // 4. ¡ÉXITO! Guarda la URL (string) en el formulario
-        setFormData(prev => ({ ...prev, imageUrl: url }));
-
-        // 5. Muestra la foto en pantalla
-        setImagePreview(preview); 
-    } catch (error) {
-        // Manejo de errores
-    } finally {
-        setUploadingImage(false);   // 6. Desbloquea el botón
-    }
-};
+        setUploading(true);
+        try {
+            const { url, preview: localPreview } = await uploadToImgBB(file);
+            setFormData(prev => ({ ...prev, imageUrl: url }));
+            setPreview(localPreview);
+            generarMensaje("Imagen cargada correctamente", "success");
+        } catch (error) {
+            console.error(error);
+            generarMensaje("Error al subir imagen a ImgBB", "error");
+        } finally {
+            setUploading(false);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(!formData.imageUrl) {
+            generarMensaje("Por favor sube una imagen del pastel", "warning");
+            return;
+        }
+
         setLoading(true);
+        const payload = {
+            ...formData,
+            precio: parseInt(formData.precio),
+            stock: parseInt(formData.stock),
+            categoria: { id: 1 } // Ajustar según tu backend
+        };
 
         try {
-            const dataToSend = {
-                ...formData,
-                precio: parseInt(formData.precio),
-                stock: parseInt(formData.stock),
-                categoria: { id: 1 } // Ajusta esto según tu lógica de categorías
-            };
-
             if (isEditing) {
-                await ProductosService.updateProducto(id, dataToSend);
-                generarMensaje("¡Producto modificado con éxito!", "success");
+                await ProductosService.updateProducto(id, payload);
+                generarMensaje("¡Pastel actualizado!", "success");
             } else {
-                await ProductosService.createProducto(dataToSend);
-                generarMensaje("¡Producto creado con éxito!", "success");
+                await ProductosService.createProducto(payload);
+                generarMensaje("¡Nuevo pastel creado!", "success");
             }
-            
-            // Volver a la lista
             navigate('/admin/productos');
-
         } catch (error) {
-            console.error(error);
-            generarMensaje("Hubo un error al guardar", "error");
+            generarMensaje("Error al guardar", "error");
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 p-6 flex justify-center">
-            <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl">
-                <h1 className="text-3xl font-bold mb-6 text-center text-gray-800 font-['Cream_Cake']">
-                    {isEditing ? `Modificar: ${formData.nombreProducto}` : 'Crear Nuevo Producto'}
+        /* Reutilizamos login-wrapper para centrado perfecto */
+        <div className="login-wrapper">
+            
+            {/* Reutilizamos login-container para la TARJETA MARRÓN estilo TitanCake */}
+            <div className="login-container" style={{ maxWidth: '600px', height: 'auto' }}> 
+                
+                <h1 className="form-title text-center mb-4">
+                    {isEditing ? 'Editar Pastel' : 'Nuevo Pastel'}
                 </h1>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Imagen */}
-                    <div className="space-y-2">
-                        <label className="font-semibold">Imagen del Producto</label>
-                        <InputFile onChange={handleImageChange} disabled={uploadingImage} preview={imagePreview} />
+                <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
+                    
+                    {/* Input de Imagen Personalizado */}
+                    <div className="mb-2 text-center">
+                        <InputFile 
+                            onChange={handleImageUpload} 
+                            disabled={uploading}
+                            preview={preview}
+                            className="bg-light text-dark rounded" // Un poco de estilo extra para que se note sobre el marrón
+                        />
+                        {uploading && <span className="text-warning mt-2 d-block">Subiendo imagen...</span>}
                     </div>
 
-                    {/* Campos de Texto */}
+                    {/* Reutilizamos la clase .login-input para los campos */}
                     <Input 
                         name="nombreProducto" 
-                        placeholder="Nombre del pastel" 
+                        placeholder="Nombre del Pastel" 
                         value={formData.nombreProducto} 
                         onChange={handleChange} 
                         required 
+                        className="login-input"
                     />
+
                     <Input 
-                        type="textarea" 
+                        type="textarea"
                         name="descripcionProducto" 
-                        placeholder="Descripción detallada" 
+                        placeholder="Descripción deliciosa..." 
                         value={formData.descripcionProducto} 
                         onChange={handleChange} 
                         required 
-                        className="h-32"
+                        className="login-input"
+                        style={{ minHeight: '100px' }}
                     />
-                    <div className="grid grid-cols-2 gap-4">
-                        <Input 
-                            type="number" 
-                            name="precio" 
-                            placeholder="Precio ($)" 
-                            value={formData.precio} 
-                            onChange={handleChange} 
-                            required 
-                        />
-                        <Input 
-                            type="number" 
-                            name="stock" 
-                            placeholder="Stock disponible" 
-                            value={formData.stock} 
-                            onChange={handleChange} 
-                            required 
-                        />
+
+                    <div className="row g-2">
+                        <div className="col-6">
+                            <Input 
+                                type="number"
+                                name="precio" 
+                                placeholder="Precio ($)" 
+                                value={formData.precio} 
+                                onChange={handleChange} 
+                                required 
+                                className="login-input"
+                            />
+                        </div>
+                        <div className="col-6">
+                            <Input 
+                                type="number"
+                                name="stock" 
+                                placeholder="Stock" 
+                                value={formData.stock} 
+                                onChange={handleChange} 
+                                required 
+                                className="login-input"
+                            />
+                        </div>
                     </div>
 
-                    {/* Botones */}
-                    <div className="flex gap-4 pt-4">
+                    <div className="d-flex gap-3 mt-4">
                         <Button 
-                            text="Cancelar" 
-                            type="button"
-                            onClick={() => navigate('/admin/productos')} 
-                            className="bg-gray-500 hover:bg-gray-600 text-white flex-1"
-                        />
+                            type="button" 
+                            onClick={() => navigate('/admin/productos')}
+                            className="login-btn w-50"
+                            style={{ fontSize: '24px', backgroundColor: '#8d6e63', color: 'white', borderColor: 'white' }}
+                        >
+                            Cancelar
+                        </Button>
+                        
                         <Button 
-                            text={loading ? "Guardando..." : "Confirmar"} 
-                            type="submit"
-                            disabled={loading || uploadingImage}
-                            className="bg-green-600 hover:bg-green-700 text-white flex-1"
-                        />
+                            type="submit" 
+                            disabled={loading || uploading}
+                            className="login-btn w-50"
+                        >
+                            {loading ? <Spinner size="sm" /> : (isEditing ? 'Guardar' : 'Crear')}
+                        </Button>
                     </div>
+
                 </form>
             </div>
         </div>

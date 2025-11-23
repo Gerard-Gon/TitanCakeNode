@@ -1,55 +1,53 @@
-// src/components/organisms/NavbarAdmin.jsx
 import React from 'react';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap'; // Agregado Button
+import { useNavigate } from 'react-router-dom'; // Agregado hook para redirección
 import '../../styles/organisms/navbar.css';
+import sesionIcon from '../../img/sesion.webp'; // Opcional: Si quieres mantener el icono como avatar
 
-function NavbarAdmin({ links = [] }) {
-  const { logout } = useAuth();
+function NavBarAdmin() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();
+    // 1. Limpiar sesión
+    localStorage.removeItem('user');
+    localStorage.removeItem('usuarioTitanCake');
+    
+    // 2. Redirigir al login
     navigate('/login');
   };
 
   return (
-    // Agregamos un borde dorado para diferenciar visualmente el modo admin
-    <Navbar variant="dark" expand="lg" className='barra' style={{ borderBottom: '3px solid #FFC107' }}>
-      <Container>
-        <Navbar.Brand as={NavLink} to="/admin/HomeAdmin" className='TituloBarra'>
-          Panel Admin
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="admin-navbar-nav" />
-        <Navbar.Collapse id="admin-navbar-nav">
+    <Navbar variant="dark" expand="lg" className='barra'>
+      <Container className='me-auto'>
+        <Navbar.Brand href="/admin/HomeAdmin" className='TituloBarra'>TitanCake Admin</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
           
-          {/* Sección Dinámica: Renderizado de Links por Props */}
+          {/* Enlaces del Administrador */}
           <Nav className="me-auto">
-            {links.map((link, index) => {
-                // Filtramos "Salir" si viene en los datos, ya que lo ponemos a la derecha
-                if (link.label === 'Salir') return null; 
-                return (
-                    <Nav.Link key={index} as={NavLink} to={link.to}>
-                        {link.label}
-                    </Nav.Link>
-                );
-            })}
+            <Nav.Link href="/admin/productos">Productos</Nav.Link>
+            <Nav.Link href="/admin/usuarios">Usuarios</Nav.Link>
           </Nav>
 
-          {/* Sección Derecha: Identidad Admin */}
+          {/* Sección Derecha */}
           <Nav className="ms-auto align-items-center gap-3">
-            <span style={{ 
-                fontFamily: 'Cream Cake', 
-                fontSize: '32px', 
-                color: '#FFC107', // Color distintivo para admin
-                textShadow: '1px 1px 2px black',
-                marginRight: '10px'
-            }}>
-              user_admin
-            </span>
             
-            <Button variant="danger" onClick={handleLogout} size="sm" className="fw-bold">
+            {/* Opcional: Mostrar el ícono de usuario como "Avatar" estático (sin link) */}
+            <div className="d-flex align-items-center">
+                <img
+                  src={sesionIcon}
+                  alt="Admin"
+                  style={{ width: '60px', height: '60px' }}
+                />
+            </div>
+
+            {/* Botón de Logout funcional */}
+            <Button 
+                variant="danger" 
+                onClick={handleLogout} 
+                size="sm" 
+                className="fw-bold"
+            >
               Cerrar Sesión
             </Button>
           </Nav>
@@ -59,4 +57,4 @@ function NavbarAdmin({ links = [] }) {
   );
 }
 
-export default NavbarAdmin;
+export default NavBarAdmin;

@@ -6,7 +6,7 @@ function HomeAdmin() {
   return (
     <section>
         <div className="centrador">
-            <h1 className="subtitulo">Bienvenidos al Panel de Administrador</h1> 
+            <h1 className="subtitulo">Bienvenido a la sección de administración</h1> 
             <Carrousel/>
         </div>
     </section>

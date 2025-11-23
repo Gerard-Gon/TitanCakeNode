@@ -1,29 +1,21 @@
 import axios from 'axios';
 
-// Asegúrate de que esta URL no tenga una barra al final
 const BASE_URL = 'https://titancakebackend.onrender.com/api/v1/usuarios';
 
 class UserService {
+    login(usuario) { return axios.post(`${BASE_URL}/login`, usuario); }
+    
+    createUser(usuario){ return axios.post(BASE_URL, usuario); }
+    
+    getAllUsuarios() { return axios.get(BASE_URL); }
 
-    // El backend espera un POST en /api/v1/usuarios/login
-    // Body: { "correo": "...", "contrasena": "..." }
-    login(usuario) {
-        return axios.post(`${BASE_URL}/login`, usuario);
-    }
+    // Método necesario para cargar los datos en el formulario de edición
+    getUsuarioById(id) { return axios.get(`${BASE_URL}/${id}`); }
 
-    // El backend espera un POST en /api/v1/usuarios
-    // Body: { "nombre": "...", "correo": "...", "contrasena": "...", "rol": { "id": ... } }
-    createUser(usuario){
-        return axios.post(BASE_URL, usuario);
-    }
+    // Método necesario para guardar los cambios
+    updateUsuario(id, usuario) { return axios.put(`${BASE_URL}/${id}`, usuario); }
 
-    getAllUsuarios() {
-        return axios.get(BASE_URL);
-    }
-
-    deleteUsuario(id) {
-        return axios.delete(`${BASE_URL}/${id}`);
-    }
+    deleteUsuario(id) { return axios.delete(`${BASE_URL}/${id}`); }
 }
 
 export default new UserService();

@@ -25,6 +25,7 @@ const publicRoutes = [
 const adminRoutes = [
   { path: '/admin/HomeAdmin', element: <HomeAdmin />, isAdmin: true },
   { path: '/admin/productos', element: <HomeProductos />, isAdmin: true },
+  
 ];
 
 // Ruta 404 por ahora no hice una página específica, solo un div simple (por ahora (puede cambiar (o eso creo)))

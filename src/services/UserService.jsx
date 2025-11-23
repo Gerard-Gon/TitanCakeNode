@@ -1,22 +1,22 @@
-// src/services/UserService.jsx
 import axios from 'axios';
 
-// URL de tu backend local
+// Asegúrate de que esta URL no tenga una barra al final
 const BASE_URL = 'https://titancakebackend.onrender.com/api/v1/usuarios';
 
 class UserService {
 
-    // El backend espera POST en /api/v1/usuarios/login
+    // El backend espera un POST en /api/v1/usuarios/login
+    // Body: { "correo": "...", "contrasena": "..." }
     login(usuario) {
         return axios.post(`${BASE_URL}/login`, usuario);
     }
 
-    // El backend espera POST en /api/v1/usuarios para crear
+    // El backend espera un POST en /api/v1/usuarios
+    // Body: { "nombre": "...", "correo": "...", "contrasena": "...", "rol": { "id": ... } }
     createUser(usuario){
         return axios.post(BASE_URL, usuario);
     }
 
-    // Métodos adicionales para el admin (opcional por ahora)
     getAllUsuarios() {
         return axios.get(BASE_URL);
     }

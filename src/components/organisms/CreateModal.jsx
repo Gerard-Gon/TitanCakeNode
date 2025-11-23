@@ -37,7 +37,7 @@ function CreateModal({ isOpen, onClose, onSubmit, inputsConfig = [], title = "Cr
         setUploadingImage(true);
         try {
             const { url, preview } = await uploadToImgBB(file);
-            setFormData((prev) => ({ ...prev, logo: url }));
+            setFormData((prev) => ({ ...prev, [e.target.name || 'imageUrl']: url }));
             setImagePreview(preview);
         } catch (error) {
             alert("Error al subir imagen: " + error.message);
@@ -67,9 +67,9 @@ function CreateModal({ isOpen, onClose, onSubmit, inputsConfig = [], title = "Cr
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                     {inputsConfig.map((input) => {
-                        if (input.name === "logo") {
+                        if (input.name === "logo" || input.name === "imageUrl") {
                             return (
-                                <div key="logo" className="space-y-2">
+                                <div key={input.name} className="space-y-2">
                                     <label className="text-sm font-medium text-gray-700">Logo</label>
                                     <InputFile onChange={handleImageChange} disabled={uploadingImage || loading} preview={imagePreview} />
                                     {uploadingImage && (

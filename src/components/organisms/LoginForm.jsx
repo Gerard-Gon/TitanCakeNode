@@ -1,4 +1,3 @@
-// src/components/organisms/LoginForm.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Forms from "../../components/templates/Forms";
@@ -8,6 +7,7 @@ import { useAuth } from "../../context/AuthContext";
 import loginData from "../../pages/auth/data/loginData";
 
 export function LoginForm() {
+  // El backend espera "correo" y "contrasena"
   const [form, setForm] = useState({ correo: "", contrasena: "" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -28,53 +28,53 @@ export function LoginForm() {
     setLoading(true);
 
     try {
-      // 1. Enviamos las credenciales al backend
+      // 1. Llamada al Backend
       const response = await UserService.login(form);
-      const usuario = response.data;
+      
+      // El backend devuelve el objeto Usuario (sin contraseña)
+      const usuarioBackend = response.data;
 
-      // 2. Guardamos la sesión
-      // Adaptamos el objeto para guardar solo lo necesario
+      // 2. Crear sesión en el frontend
       const userData = {
-        id: usuario.id,
-        nombre: usuario.nombre,
-        correo: usuario.correo,
-        rol: usuario.rol // Guardamos el rol para saber si es admin
+        id: usuarioBackend.id,
+        nombre: usuarioBackend.nombre,
+        correo: usuarioBackend.correo,
+        rol: usuarioBackend.rol // Guardamos el rol para proteger rutas
       };
 
-      localStorage.setItem("user", JSON.stringify(userData));
-      login(userData);
+      // 3. Actualizar Contexto
+      login(userData); 
+      
+      generarMensaje(`¡Bienvenido ${usuarioBackend.nombre}!`, "success");
 
-      generarMensaje(`¡Bienvenido ${usuario.nombre}!`, "success");
-
-      // 3. Redirección inteligente basada en el Rol
-      setTimeout(() => {
-        // Asumimos que rol.id 1 es Admin
-        if (usuario.rol && usuario.rol.id === 1) {
-            navigate("/admin/dashboard"); // O la ruta de admin que tengas
-        } else {
-            navigate("/");
-        }
-      }, 1000);
+      // 4. Redirección basada en Rol
+      // Asumiendo que Rol ID 1 es Administrador
+      if (usuarioBackend.rol && usuarioBackend.rol.id === 1) {
+          navigate("/admin/HomeAdmin");
+      } else {
+          navigate("/");
+      }
 
     } catch (error) {
-      console.error(error);
-      const msg = error.response?.data || "Credenciales inválidas o error de conexión";
-      generarMensaje(msg, "error");
+      console.error("Error Login:", error);
+      if (error.response && error.response.status === 401) {
+        generarMensaje("Correo o contraseña incorrectos", "error");
+      } else {
+        generarMensaje("Error de conexión con el servidor", "error");
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  // ... (El resto del código para mapear loginData se mantiene igual que en la respuesta anterior) ...
-  // Si necesitas que repita esa parte del código para copiar y pegar completo, avísame.
-  
-  // Lógica de mapeo para el Forms
+  // Mapeo de datos para el componente Forms (Igual que tenías, solo asegurando los names)
   const formDataWithHandlers = loginData.map((item, index) => {
     if (item.type === "inputs") {
       return {
         ...item,
         inputs: item.inputs.map((input) => ({
           ...input,
+          // Aseguramos que los inputs tengan el value del estado
           value: form[input.name] || "",
           onChange: handleChange,
         })),
@@ -89,9 +89,9 @@ export function LoginForm() {
         text: loading ? "Ingresando..." : item.text,
       };
     }
+    // ... manejo del botón de registro ...
     if (item.type === "text" && item.text[0].content.type === "button") {
-        // Arreglo para el botón de "Crear usuario" dentro del login
-        return {
+         return {
             ...item,
             key: index,
             text: [
@@ -114,7 +114,7 @@ export function LoginForm() {
   });
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit}>
       <Forms content={formDataWithHandlers} />
     </form>
   );

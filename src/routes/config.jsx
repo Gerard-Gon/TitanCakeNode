@@ -12,6 +12,7 @@ const HomeAdmin = lazy(() => import('../pages/admin/HomeAdmin'));
 const HomeProductos = lazy(() => import('../pages/admin/Productos/HomeProductos'));
 const HomeUsuarios = lazy(() => import('../pages/admin/usuarios/HomeUsuarios'));
 const ProductForm = lazy(() => import('../pages/admin/Productos/ProductForm'));
+const UserForm = lazy(() => import('../pages/admin/usuarios/UsuarioForm'));
 
 // Rutas públicas o del usuario, así están mejor organizadas
 const publicRoutes = [

@@ -1,4 +1,3 @@
-// src/components/molecules/DynamicTable.jsx
 import React from 'react';
 import Image from '../atoms/Image';
 import Button from '../atoms/Button';
@@ -49,10 +48,20 @@ function DynamicTable({ columns = [], data = [], className = '', striped = true,
                                         return (
                                             <td key={cellIndex} className="px-4 py-3 text-sm">
                                                 <div className="flex gap-2">
-                                                    <Button text="Editar" onClick={() => row.onEdit?.(row)}
-                                                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 text-xs rounded-md font-medium active:scale-95 transition-all" />
-                                                    <Button text="Eliminar" onClick={() => row.onDelete?.(row.id)}
-                                                        className="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 text-xs rounded-md font-medium active:scale-95 transition-all" />
+                                                    {/* CORRECCIÓN: Pasamos el texto como 'children' (dentro de las etiquetas) en lugar de prop 'text' */}
+                                                    <Button 
+                                                        onClick={() => row.onEdit?.(row)}
+                                                        className="titan-btn-action btn-edit"
+                                                    >
+                                                        Editar
+                                                    </Button>
+                                                    
+                                                    <Button 
+                                                        onClick={() => row.onDelete?.(row.id)}
+                                                        className="titan-btn-action btn-delete"
+                                                    >
+                                                        Eliminar
+                                                    </Button>
                                                 </div>
                                             </td>
                                         );
@@ -63,23 +72,23 @@ function DynamicTable({ columns = [], data = [], className = '', striped = true,
                                         headerLower.includes('foto') ||
                                         headerLower.includes('avatar');
 
-                                        const shouldShowImage = isImageColumn && isImageUrl(cell);
+                                    const shouldShowImage = isImageColumn && isImageUrl(cell);
                                         
-                                        return (
-                                            <td key={cellIndex} className={`px-4 py-3 text-sm text-gray-900 align-top ${isImageColumn ? 'whitespace-normal' : 'whitespace-nowrap'} `}>
-                                                {shouldShowImage ? ( 
-                                                    <Image src={cell} alt={header} className="h-12 w-12 object-contain rounded-lg shadow-sm"
-                                                        onError={(e) => {
-                                                            e.target.style.display = 'none';
-                                                            e.target.nextSibling.style.display = 'block';
-                                                        }}
-                                                    />
-                                                ) : null}
-                                                <span className={shouldShowImage ? 'hidden' : ''}>
-                                                    {cell}
-                                                </span>
-                                            </td>
-                                        );
+                                    return (
+                                        <td key={cellIndex} className={`px-4 py-3 text-sm text-gray-900 align-top ${isImageColumn ? 'whitespace-normal' : 'whitespace-nowrap'} `}>
+                                            {shouldShowImage ? ( 
+                                                <Image src={cell} alt={header} className="h-12 w-12 object-contain rounded-lg shadow-sm"
+                                                    onError={(e) => {
+                                                        e.target.style.display = 'none';
+                                                        e.target.nextSibling.style.display = 'block';
+                                                    }}
+                                                />
+                                            ) : null}
+                                            <span className={shouldShowImage ? 'hidden' : ''}>
+                                                {cell}
+                                            </span>
+                                        </td>
+                                    );
                                 })}
                             </tr>
                         );

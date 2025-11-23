@@ -1,4 +1,3 @@
-// src/components/organisms/CreateModal.jsx
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button as BsButton, Spinner } from 'react-bootstrap';
 import InputFile from '../atoms/InputFile';

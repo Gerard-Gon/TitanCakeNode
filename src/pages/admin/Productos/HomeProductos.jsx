@@ -7,10 +7,7 @@ import CreateModal from '../../../components/organisms/CreateModal';
 import { generarMensaje } from '../../../utils/GenerarMensaje';
 import ProductosService from '../../../services/ProductService';
 import productData from './data/productoData';
-
-// Importamos el nuevo CSS de admin (reemplaza el import de login.css anterior)
 import '../../../styles/pages/admin.css';
-// También podemos mantener login.css si usas clases de ahí en otros lados, pero admin.css ya cubre esto.
 import '../../../styles/pages/login.css'; 
 
 const createInputs = [
@@ -33,7 +30,7 @@ function HomeProductos() {
         const tableItem = updatedData.find(i => i.type === "table");
 
         if (updatedData[0]?.text) {
-            // Usamos la clase .form-title que ya existe en login.css o creamos una nueva si quieres cambiarla
+            
             updatedData[0].text[0].className = "form-title text-center text-dark"; 
         }
 
@@ -131,7 +128,7 @@ function HomeProductos() {
                 <div className="d-flex justify-content-end mb-4">
                     <Button 
                         onClick={() => { setEditingProduct(null); setIsModalOpen(true); }}
-                        className="login-btn titan-btn-create" // login-btn viene de login.css, titan-btn-create de admin.css
+                        className="login-btn titan-btn-create" 
                     >
                         + Nuevo Pastel
                     </Button>

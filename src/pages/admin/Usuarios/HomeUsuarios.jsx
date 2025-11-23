@@ -1,4 +1,3 @@
-// src/pages/admin/Usuarios/HomeUsuarios.jsx
 import React, { useState, useEffect } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
 import Section from '../../../components/templates/Section';
@@ -6,9 +5,7 @@ import Button from '../../../components/atoms/Button';
 import CreateModal from '../../../components/organisms/CreateModal';
 import { generarMensaje } from '../../../utils/GenerarMensaje';
 import UserService from '../../../services/UserService';
-import { usuarioData } from './data/usuarioData'; // Ajusta la ruta si es necesario
-
-// Importamos los estilos
+import { usuarioData } from './data/usuarioData'; 
 import '../../../styles/pages/admin.css';
 import '../../../styles/pages/login.css';
 
@@ -26,11 +23,8 @@ function HomeUsuarios() {
     const [editingUsuario, setEditingUsuario] = useState(null);
 
     const loadData = async () => {
-        // Clonamos la estructura para no mutar el original directamente
         const updatedData = JSON.parse(JSON.stringify(usuarioData));
         const tableItem = updatedData.find(i => i.service === "usuarios" || i.type === "table");
-
-        // Ajuste visual del título si existe
         if (updatedData[0]?.text) {
             updatedData[0].text[0].className = "form-title text-center text-dark"; 
         }
@@ -42,10 +36,9 @@ function HomeUsuarios() {
 
             const dataWithActions = usuariosBackend.map(user => ({
                 id: user.id,
-                // En usuarios no solemos mostrar imagen en la tabla, pero si tuvieras avatar iría aquí
                 nombre: <span className="titan-table-name" style={{ fontSize: '20px' }}>{user.nombre}</span>,
                 correo: user.correo,
-                rol: user.rol ? user.rol.nombre : 'Cliente', // Muestra el rol si existe
+                rol: user.rol ? user.rol.nombre : 'Cliente', 
                 onEdit: () => handleOpenEdit(user),
                 onDelete: () => handleDelete(user.id),
             }));
@@ -90,11 +83,7 @@ function HomeUsuarios() {
             };
 
             if (editingUsuario) {
-                // Si no se escribe contraseña nueva, la quitamos para no sobreescribirla con vacío
-                // (Depende de cómo lo maneje tu backend, algunos ignoran nulos)
                 if (!formData.contrasena) delete payload.contrasena;
-
-                // NOTA: Asegúrate de tener updateUsuario en UserService.jsx
                 await UserService.updateUsuario(editingUsuario.id, payload);
                 generarMensaje('¡Usuario actualizado con éxito!', 'success');
             } else {

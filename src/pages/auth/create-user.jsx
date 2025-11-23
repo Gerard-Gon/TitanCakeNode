@@ -25,32 +25,25 @@ const CreateUser = () => {
         setLoading(true);
 
         try {
-            // Construimos el objeto tal como lo pide el Backend (Usuario.java)
             const usuarioParaBackend = {
                 nombre: form.nombre,
                 correo: form.correo,
                 contrasena: form.contrasena,
-                // IMPORTANTE: El ID 2 debe existir en tu tabla 'roles' en la base de datos
-                // Asumimos que ID 2 es 'CLIENTE' o similar.
                 rol: {
                     id: 2 
                 }
             };
 
-            console.log("Enviando usuario:", usuarioParaBackend); // Para depuración
-
+            console.log("Enviando usuario:", usuarioParaBackend); 
             await UserService.createUser(usuarioParaBackend);
 
             generarMensaje('¡Usuario creado con éxito!', 'success');
-
-            // Redirigir al login después de un momento
             setTimeout(() => {
                 navigate('/login');
             }, 1500);
 
         } catch (error) {
             console.error("Error al registrar:", error);
-            // Intentamos leer el mensaje de error del backend si existe
             const msg = error.response?.data?.message || 'Error al crear usuario. Verifica tu conexión o si el correo ya existe.';
             generarMensaje(msg, 'error');
         } finally {
@@ -58,9 +51,7 @@ const CreateUser = () => {
         }
     };
 
-    // ... (Mantén el resto de tu configuración 'registerData' y el return igual que antes)
     const registerData = [
-        // ... tus inputs configurados
         {
             type: "text",
             text: [{ content: "Crear Cuenta", variant: "h1", className: "text-center form-title" }]
@@ -103,9 +94,9 @@ const CreateUser = () => {
             text: loading ? "Registrando..." : "Registrarse",
             className: "w-full mt-4 mb-3 login-btn",
             disabled: loading,
-            onClick: handleSubmit // Nota: Cambié 'onclick' a 'onClick' (React usa camelCase)
+            onClick: handleSubmit 
         },
-        // ... resto del contenido
+
         {
             type: "text",
             text: [{
@@ -123,7 +114,6 @@ const CreateUser = () => {
     return (
         <div className="login-wrapper">
             <div className="login-container">
-                {/* El formulario maneja el submit */}
                 <form onSubmit={handleSubmit}>
                     <Forms content={registerData} />
                 </form>

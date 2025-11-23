@@ -6,8 +6,6 @@ import UserService from '../../../services/UserService';
 import { generarMensaje } from '../../../utils/GenerarMensaje';
 import Input from '../../../components/atoms/Input';
 import Button from '../../../components/atoms/Button';
-
-// Reutilizamos los mismos estilos para mantener la consistencia visual
 import '../../../styles/pages/login.css'; 
 
 function UsuarioForm() {
@@ -22,18 +20,17 @@ function UsuarioForm() {
     });
     const [loading, setLoading] = useState(false);
 
-    // Cargar datos si es edición
+    
     useEffect(() => {
         if (isEditing) {
             setLoading(true);
-            // NOTA: Asegúrate de agregar 'getUsuarioById' en UserService.jsx
             UserService.getUsuarioById(id)
                 .then(res => {
                     const user = res.data;
                     setFormData({
                         nombre: user.nombre,
                         correo: user.correo,
-                        contrasena: '' // Por seguridad, usualmente no se pre-carga la contraseña
+                        contrasena: '' 
                     });
                 })
                 .catch(err => {
@@ -52,7 +49,6 @@ function UsuarioForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // Validaciones básicas
         if (!formData.nombre || !formData.correo) {
             generarMensaje("Nombre y correo son obligatorios", "warning");
             return;
@@ -64,21 +60,17 @@ function UsuarioForm() {
 
         setLoading(true);
         
-        // Preparamos el objeto para el backend
         const payload = {
             ...formData,
-            rol: { id: 2 } // Asignamos rol CLIENTE por defecto (ajustar si tienes selector de roles)
+            rol: { id: 2 } 
         };
 
-        // Si estamos editando y el campo contraseña está vacío, lo quitamos del payload
-        // (Esto depende de cómo tu backend maneje nulos en updates)
         if (isEditing && !formData.contrasena) {
             delete payload.contrasena;
         }
 
         try {
             if (isEditing) {
-                // NOTA: Asegúrate de tener 'updateUsuario' en UserService.jsx
                 await UserService.updateUsuario(id, payload);
                 generarMensaje("¡Usuario actualizado!", "success");
             } else {
@@ -95,10 +87,7 @@ function UsuarioForm() {
     };
 
     return (
-        /* Reutilizamos login-wrapper para centrado perfecto */
         <div className="login-wrapper">
-            
-            {/* Reutilizamos login-container para la TARJETA MARRÓN estilo TitanCake */}
             <div className="login-container" style={{ maxWidth: '600px', height: 'auto' }}> 
                 
                 <h1 className="form-title text-center mb-4">
@@ -106,8 +95,6 @@ function UsuarioForm() {
                 </h1>
 
                 <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
-                    
-                    {/* Campos del Formulario */}
                     <Input 
                         name="nombre" 
                         placeholder="Nombre Completo" 
@@ -133,7 +120,7 @@ function UsuarioForm() {
                         placeholder={isEditing ? "Nueva Contraseña (opcional)" : "Contraseña"} 
                         value={formData.contrasena} 
                         onChange={handleChange} 
-                        required={!isEditing} // Solo obligatorio al crear
+                        required={!isEditing} 
                         className="login-input"
                     />
 

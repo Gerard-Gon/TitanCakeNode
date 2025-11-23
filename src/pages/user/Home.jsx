@@ -5,8 +5,8 @@ import Carrousel from '../../components/organisms/Carrousel';
 function Home() {
   return (
     <section>
-        <div className="centrador">
-            <h1 className="subtitulo">Bienvenidos</h1> 
+        <div className="home-wrapper">
+            <h1 className="home-welcome-title">Bienvenidos</h1> 
             <Carrousel/>
         </div>
     </section>

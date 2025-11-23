@@ -1,5 +1,3 @@
-// src/pages/user/data/usuarioData.jsx
-
 export const usuarioData = [
     {
         type: "text",
@@ -21,10 +19,8 @@ export const usuarioData = [
     {
         type: "table",
         title: "Lista de Usuarios",
-        // Estas columnas deben coincidir con las que mapeas en HomeUsuarios
         columns: ["ID", "Nombre", "Correo", "Rol", "Acciones"], 
         data: [], 
-        // Este 'service' es clave: HomeUsuarios busca este string para inyectar los datos
         service: "usuarios", 
         className: "my-8 shadow-lg rounded-lg overflow-hidden",
     },

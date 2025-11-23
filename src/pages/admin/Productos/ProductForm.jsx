@@ -1,4 +1,4 @@
-// src/pages/admin/Productos/ProductForm.jsx
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
@@ -8,8 +8,6 @@ import Input from '../../../components/atoms/Input';
 import Button from '../../../components/atoms/Button';
 import InputFile from '../../../components/atoms/InputFile'; 
 import { uploadToImgBB } from '../../../utils/uploadImage';
-
-// Reutilizamos LOS MISMOS estilos del login para mantener la esencia
 import '../../../styles/pages/login.css'; 
 
 function ProductForm() {
@@ -25,10 +23,9 @@ function ProductForm() {
         imageUrl: ''
     });
     const [loading, setLoading] = useState(false);
-    const [uploading, setUploading] = useState(false); // Estado para la subida de imagen
+    const [uploading, setUploading] = useState(false); 
     const [preview, setPreview] = useState(null);
 
-    // Cargar datos si es edición
     useEffect(() => {
         if (isEditing) {
             setLoading(true);
@@ -107,10 +104,8 @@ function ProductForm() {
     };
 
     return (
-        /* Reutilizamos login-wrapper para centrado perfecto */
+        
         <div className="login-wrapper">
-            
-            {/* Reutilizamos login-container para la TARJETA MARRÓN estilo TitanCake */}
             <div className="login-container" style={{ maxWidth: '600px', height: 'auto' }}> 
                 
                 <h1 className="form-title text-center mb-4">
@@ -119,18 +114,15 @@ function ProductForm() {
 
                 <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
                     
-                    {/* Input de Imagen Personalizado */}
                     <div className="mb-2 text-center">
                         <InputFile 
                             onChange={handleImageUpload} 
                             disabled={uploading}
                             preview={preview}
-                            className="bg-light text-dark rounded" // Un poco de estilo extra para que se note sobre el marrón
+                            className="bg-light text-dark rounded" 
                         />
                         {uploading && <span className="text-warning mt-2 d-block">Subiendo imagen...</span>}
                     </div>
-
-                    {/* Reutilizamos la clase .login-input para los campos */}
                     <Input 
                         name="nombreProducto" 
                         placeholder="Nombre del Pastel" 

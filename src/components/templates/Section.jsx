@@ -4,6 +4,7 @@ import Image from "../atoms/Image";
 import CardsDisplay from "../organisms/CardsDisplay";
 import DynamicTable from "../molecules/DynamicTable";
 
+
 function Section({ content = [], className = "p-4" }) {
   return (
     <div className={className}>
@@ -31,9 +32,9 @@ function Section({ content = [], className = "p-4" }) {
 
         if (item.type === "table") {
           return (
-            <div key={index} className={item.className || "my-6"}>
+            <div key={index} className={`titan-table-wrapper-centered ${item.className || "my-6"}`}>
               {item.title && ( 
-                <h3 className="text-xl font-bold mb-3 text-gray-800"> 
+                <h3 className="titan-subsection-title"> 
                   {item.title}
                 </h3>
               )}

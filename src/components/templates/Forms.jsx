@@ -11,9 +11,8 @@ function Forms({ content = [], className = "p-4" }) {
                     return <DynamicTexts key={index} Texts={item.text} />;
                 }
 
-                // ... código anterior
+                
                 if(item.type === "button") {
-                    // CAMBIO: Usar item.text como hijo (children) en lugar de prop 'text'
                     return (<Button key={index} className={item.className} onClick={item.onClick} disabled={item.disabled}
                     >
                             {item.text}

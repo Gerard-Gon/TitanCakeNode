@@ -1,5 +1,4 @@
-// src/pages/auth/data/loginData.jsx
-import React from 'react'; // Necesario para usar JSX en la propiedad content
+import React from 'react'; 
 
 const loginData = [
     {
@@ -8,7 +7,7 @@ const loginData = [
             {
                 content: "TitanCake",
                 variant: "h1",
-                className: "text-center form-title", // Usa la nueva clase con fuente Cream Cake
+                className: "text-center form-title", 
             },
             {
                 content: "Inicia sesión para continuar",
@@ -26,7 +25,6 @@ const loginData = [
                 name: "correo",
                 required: true,
                 autoComplete: "off",
-                // Eliminamos bordes e indigo, usamos nuestra clase login-input
                 className: "w-full login-input mb-3", 
             },
             {
@@ -43,7 +41,6 @@ const loginData = [
     {           
         type: "button",
         text: "Ingresar",
-        // Botón grande y personalizado
         className: "w-full mt-4 mb-3 login-btn", 
     },
     {

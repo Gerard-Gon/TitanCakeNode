@@ -15,12 +15,12 @@ function NavBar() {
   };
 
   useEffect(() => {
-    updateCount(); // Inicial
+    updateCount(); 
 
-    // 🔹 Escucha cuando el carrito cambie
+    
     window.addEventListener("cartUpdated", updateCount);
 
-    // Limpieza al desmontar
+    
     return () => {
       window.removeEventListener("cartUpdated", updateCount);
     };

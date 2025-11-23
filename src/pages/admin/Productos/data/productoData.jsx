@@ -1,4 +1,3 @@
-// src/pages/admin/Productos/data/productoData.jsx
 export const productData = [
     {
         type: "text",
@@ -7,7 +6,7 @@ export const productData = [
                 id: 1, 
                 content: "Gestión de Productos", 
                 variant: "h1", 
-                className: "text-center form-title mb-2" // Clase de tu CSS global
+                className: "text-center form-title mb-2" 
             },
             { 
                 id: 2, 
@@ -20,11 +19,10 @@ export const productData = [
     {
         type: "table",
         title: "Inventario Actual",
-        // DynamicTable buscará estas keys en los datos mapeados
         columns: ["ID", "Imagen", "Nombre", "Precio", "Stock", "Acciones"],
         data: [], 
         service: "productos",
-        className: "my-8 shadow-lg rounded-lg overflow-hidden", // Estilos Tailwind/Bootstrap híbridos
+        className: "my-8 shadow-lg rounded-lg overflow-hidden", 
     },
 ];
 

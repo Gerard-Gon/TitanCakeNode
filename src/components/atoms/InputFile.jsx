@@ -1,4 +1,3 @@
-// src/components/atoms/InputFile.jsx
 import React, { useState, useRef } from 'react';
 // Importamos el CSS general del admin
 import '../../styles/pages/admin.css';

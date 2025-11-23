@@ -53,20 +53,24 @@ function ProductForm() {
     };
 
     const handleImageChange = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+    const file = e.target.files[0]; // 1. Agarra el archivo
+    setUploadingImage(true);        // 2. Bloquea el botón de guardar (para que no envíen sin terminar)
 
-        setUploadingImage(true);
-        try {
-            const { url, preview } = await uploadToImgBB(file);
-            setFormData(prev => ({ ...prev, imageUrl: url }));
-            setImagePreview(preview);
-        } catch (error) {
-            generarMensaje("Error al subir la imagen", "error");
-        } finally {
-            setUploadingImage(false);
-        }
-    };
+    try {
+         // 3. Llama a la utilidad del Paso 4
+        const { url, preview } = await uploadToImgBB(file);
+
+        // 4. ¡ÉXITO! Guarda la URL (string) en el formulario
+        setFormData(prev => ({ ...prev, imageUrl: url }));
+
+        // 5. Muestra la foto en pantalla
+        setImagePreview(preview); 
+    } catch (error) {
+        // Manejo de errores
+    } finally {
+        setUploadingImage(false);   // 6. Desbloquea el botón
+    }
+};
 
     const handleSubmit = async (e) => {
         e.preventDefault();

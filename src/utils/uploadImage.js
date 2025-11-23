@@ -1,29 +1,25 @@
+// src/utils/uploadImage.js
 import Resizer from 'react-image-file-resizer';
 
 const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 
 export const uploadToImgBB = async (file) => {
     return new Promise((resolve, reject) => {
+        if (!IMGBB_API_KEY) {
+            reject(new Error("Falta la API KEY de ImgBB en el archivo .env"));
+            return;
+        }
         Resizer.imageFileResizer(
             file,
-            1024,         // maxWidth (número)
-            1024,         // maxHeight (número)
-            'WEBP',       // format (string)
-            80,           // quality (número)
-            0,            // rotation (número)
-            async (uri) => {  // callback (función)
+            1024,         // Ancho máximo
+            1024,         // Alto máximo
+            'WEBP',       // Formato
+            80,           // Calidad (0-100)
+            0,            // Rotación
+            async (uri) => {
                 try {
-                    if (!uri || typeof uri !== 'string') {
-                        reject(new Error("Error al procesar imagen"));
-                        return;
-                    }
-
+                    // La librería devuelve base64, hay que limpiarlo para enviarlo
                     const base64 = uri.split(',')[1];
-                    if (!base64) {
-                        reject(new Error("Base64 inválido"));
-                        return;
-                    }
-
                     const formData = new FormData();
                     formData.append('image', base64);
 
@@ -36,17 +32,17 @@ export const uploadToImgBB = async (file) => {
 
                     if (result.success) {
                         resolve({
-                            url: result.data.url,
-                            preview: uri,
+                            url: result.data.url, // Esta es la URL String para tu Backend Java
+                            preview: uri,         // Esto es para mostrarla en el formulario al instante
                         });
                     } else {
-                        reject(new Error(result.error?.message || "Error al subir"));
+                        reject(new Error("Error en ImgBB: " + (result.error?.message || "Desconocido")));
                     }
                 } catch (err) {
                     reject(err);
                 }
             },
-            'base64'      // outputType (string)
+            'base64'
         );
     });
 };

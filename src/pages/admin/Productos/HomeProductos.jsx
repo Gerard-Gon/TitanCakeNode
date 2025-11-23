@@ -1,53 +1,51 @@
+// src/pages/admin/Productos/HomeProductos.jsx
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importante para redirigir
+import { useNavigate } from 'react-router-dom';
+import { Container, Spinner } from 'react-bootstrap'; // Respetamos imports de Bootstrap
 import Section from '../../../components/templates/Section';
 import Button from '../../../components/atoms/Button';
-import productData from './data/productoData'; 
-import ProductosService from '../../../services/ProductService'; 
 import { generarMensaje } from '../../../utils/GenerarMensaje';
+import ProductosService from '../../../services/ProductService';
+import productData from './data/productoData';
 
 function HomeProductos() {
     const [pageData, setPageData] = useState(productData);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); // Hook para navegar
+    const navigate = useNavigate();
 
     const loadData = async () => {
-        const updatedData = [...pageData];
-        const tableItem = updatedData.find(i => i.service === "productos");
+        // Clonamos la estructura para modificarla
+        const updatedData = JSON.parse(JSON.stringify(productData));
+        const tableItem = updatedData.find(i => i.type === "table");
 
-        if (tableItem) {
-            try {
-                setLoading(true);
-                const response = await ProductosService.getAllProductos();
-                const data = response.data;
+        try {
+            setLoading(true);
+            const response = await ProductosService.getAllProductos();
+            const productosBackend = response.data; // Array de tu modelo Java Producto
 
-                // Mapeamos los datos para la tabla
-                // NOTA: Al no incluir botones de "Detalles" ni "Carrito", estos desaparecen automáticamente.
-                const dataWithActions = data.map(prod => ({
-                    id: prod.id,
-                    imagen: prod.imageUrl,
-                    nombre: prod.nombreProducto,
-                    // descripcion: prod.descripcionProducto, (Opcional si la tabla se ve muy llena)
-                    precio: `$${prod.precio}`,
-                    stock: prod.stock,
-                    
-                    // ACCIÓN MODIFICAR: Redirige a la nueva página
-                    onEdit: () => navigate(`/admin/productos/editar/${prod.id}`),
-                    
-                    // ACCIÓN ELIMINAR: Se mantiene directa aquí
-                    onDelete: () => handleDelete(prod.id),
-                }));
+            // Mapeo de Datos: Backend Java -> Frontend Table
+            const dataWithActions = productosBackend.map(prod => ({
+                // Keys deben coincidir (en minúsculas) con las columnas de productData
+                id: prod.id,
+                nombre: prod.nombreProducto, // Tu modelo usa 'nombreProducto'
+                precio: `$${prod.precio.toLocaleString('es-CL')}`,
+                stock: prod.stock,
+                
+                // Inyección de funciones para DynamicTable
+                onEdit: () => navigate(`/admin/productos/editar/${prod.id}`),
+                onDelete: () => handleDelete(prod.id),
+            }));
 
-                tableItem.data = dataWithActions;
-            } catch (error) {
-                console.error(error);
-                generarMensaje('No se pudieron cargar los productos', 'error');
-                tableItem.data = [];
-            } finally {
-                setLoading(false);
-            }
+            if(tableItem) tableItem.data = dataWithActions;
+
+        } catch (error) {
+            console.error("Error cargando productos:", error);
+            generarMensaje('No se pudo conectar con el servidor', 'error');
+            if(tableItem) tableItem.data = [];
+        } finally {
+            setLoading(false);
+            setPageData(updatedData);
         }
-        setPageData(updatedData);
     };
 
     useEffect(() => {
@@ -55,38 +53,39 @@ function HomeProductos() {
     }, []);
 
     const handleDelete = async (id) => {
-        if (!confirm('¿Estás seguro de eliminar este producto permanentemente?')) return;
+        if (!window.confirm('¿Estás seguro de eliminar este pastel?')) return;
 
         try {
             await ProductosService.deleteProducto(id);
-            generarMensaje('¡Producto eliminado con éxito!', 'success');
-            loadData(); // Recargamos la lista
+            generarMensaje('¡Producto eliminado correctamente!', 'success');
+            loadData(); // Recargamos la tabla
         } catch (error) {
             console.error(error);
-            generarMensaje('Error al eliminar. Verifica si está en algún carrito.', 'error');
+            generarMensaje('Error al eliminar (¿El producto está en un carrito?)', 'error');
         }
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-vh-100" style={{ backgroundColor: '#f8f9fa' }}>
             {loading && (
-                <div className="fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50">
-                    <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-600"></div>
+                <div className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+                    <Spinner animation="border" variant="primary" />
                 </div>
             )}
 
-            {/* Botón SUPERIOR para Crear Producto */}
-            <div className="container mx-auto py-8 px-4 flex justify-between items-center">
-                <h2 className="text-3xl font-bold text-gray-800 font-['Cream_Cake']">Gestión de Productos</h2>
-                <Button
-                    text="+ Crear Nuevo Producto"
-                    onClick={() => navigate('/admin/productos/crear')} // Redirige a la página de creación
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md font-bold transition-transform transform hover:scale-105"
-                />
-            </div>
+            <Container className="py-5">
+                {/* Botón de Acción Flotante/Superior */}
+                <div className="d-flex justify-content-end mb-3">
+                    <Button 
+                        text="Nuevo Producto"
+                        onClick={() => navigate('/admin/productos/crear')}
+                        className="bg-success text-white border-0 px-4 py-2 fw-bold shadow-sm hover:scale-105"
+                    />
+                </div>
 
-            {/* Tabla de Productos */}
-            <Section content={pageData} className="container mx-auto px-4 pb-10" />
+                {/* Renderizado de la Sección (Texto + Tabla) */}
+                <Section content={pageData} />
+            </Container>
         </div>
     );
 }

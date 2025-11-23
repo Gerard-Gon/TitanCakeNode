@@ -24,7 +24,7 @@ const publicRoutes = [
   { path: '/create-user', element: <CreateUser />, showNavbar: true},
   { path: '/products', element: <Products />, showNavbar: true},
   { path: '/carrito', element: <Carrito />, showNavbar: true},
-  { path: '/contacto', element: <Contact />, showNavbar: true},
+  { path: '/contact', element: <Contact />, showNavbar: true},
   { path: '/profile', element: <UserProfile />, showNavbar: true },
   { path: '/products/:id', element: <ProductDetail />, showNavbar: true },
 ];

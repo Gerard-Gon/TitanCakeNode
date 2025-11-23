@@ -3,7 +3,8 @@ import { Container } from 'react-bootstrap';
 import Text from '../../components/atoms/Text.jsx';
 import DynamicForm from '../../components/molecules/DynamicForm.jsx';
 import Button from '../../components/atoms/Button.jsx';
-import '../styles/pages/contact.css';
+// CORRECCIÓN: Subimos dos niveles para llegar a styles
+import '../../styles/pages/contact.css'; 
 
 function Contact() {
   const initialFormData = {

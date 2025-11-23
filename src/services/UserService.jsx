@@ -24,6 +24,19 @@ class UserService {
     deleteUsuario(id) {
         return axios.delete(`${BASE_URL}/${id}`);
     }
+
+    getUsuarioById(id) {
+        return axios.get(`${BASE_URL}/${id}`);
+    }
+
+    // AGREGAR ESTO:
+    updateUsuario(id, data) {
+        return axios.put(`${BASE_URL}/${id}`, data);
+    }
+
+    updateUsuario(id, data) {
+        return axios.patch(`${BASE_URL}/${id}`, data);
+    }
 }
 
 export default new UserService();

@@ -8,6 +8,8 @@ const Contact = lazy(() => import('../pages/user/Contact'));
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'));
 const CreateUser = lazy(() => import('../pages/auth/create-user'));
 const HomeAdmin = lazy(() => import('../pages/admin/HomeAdmin'));
+const UserProfile = lazy(() => import('../pages/user/Perfil')); // IMPORTAR NUEVO
+const ProductDetail = lazy(() => import('../pages/user/ProductsDetails')); // Asegurar import
 
 const HomeProductos = lazy(() => import('../pages/admin/Productos/HomeProductos'));
 const HomeUsuarios = lazy(() => import('../pages/admin/Usuarios/HomeUsuarios'));
@@ -23,6 +25,8 @@ const publicRoutes = [
   { path: '/products', element: <Products />, showNavbar: true},
   { path: '/carrito', element: <Carrito />, showNavbar: true},
   { path: '/contacto', element: <Contact />, showNavbar: true},
+  { path: '/profile', element: <UserProfile />, showNavbar: true },
+  { path: '/products/:id', element: <ProductDetail />, showNavbar: true },
 ];
 
 // Rutas del administrador 

@@ -1,14 +1,14 @@
-// src/App.jsx
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Suspense } from "react";
 
-// Datos (Data-Driven UI)
+// Datos
 import { publicLinks } from "./data/navbarPublicLinks";
 import { adminLinks } from "./data/navbarAdminLinks";
 
 // Componentes
-import Navbar from "./components/organisms/Navbar";
-import NavbarAdmin from "./components/organisms/NavbarAdmin";
+import Navbar from "./components/organisms/Navbar"; // Guest
+import NavbarAdmin from "./components/organisms/NavbarAdmin"; // Admin
+import NavbarUsuario from "./components/organisms/NavbarUsuario"; // NUEVO: Usuario Logueado
 import Footer from "./components/organisms/Footer";
 
 import { appRoutes } from "./routes/config";
@@ -16,28 +16,35 @@ import { useAuth } from "./context/AuthContext";
 
 function Layout() {
   const location = useLocation();
-  const { user } = useAuth(); // Obtenemos usuario desde LocalStorage/Contexto
+  const { user, loading } = useAuth(); 
 
-  // 1. Determinar Rol (Admin ID = 1)
-  const isUserAdmin = user?.rol?.id === 1;
+  // Si está cargando la sesión, mostramos spinner para evitar parpadeos
+  if (loading) return <div className="text-center mt-5">Cargando...</div>;
 
-  // 2. Lógica de visibilidad del Navbar
-  // Si es admin, siempre mostramos su barra. Si es usuario, ocultamos en login/registro.
+  // LÓGICA DE ROLES
+  const isAdmin = user?.rol?.id === 1;
+  const isClient = user?.rol?.id === 2; // Asumiendo que 2 es el ID de usuario normal
+
+  // Lógica de visibilidad (ocultar en login/registro)
   const hideNavbarRoutes = ['/login', '/create-user'];
-  const shouldShowNavbar = isUserAdmin || !hideNavbarRoutes.includes(location.pathname);
+  const showNavbar = !hideNavbarRoutes.includes(location.pathname);
+
+  // Decidir qué Navbar Renderizar
+  let CurrentNavbar = null;
+  
+  if (showNavbar) {
+      if (isAdmin) {
+          CurrentNavbar = <NavbarAdmin links={adminLinks} />;
+      } else if (isClient) {
+          CurrentNavbar = <NavbarUsuario />; // Navbar de Cliente
+      } else {
+          CurrentNavbar = <Navbar links={publicLinks} />; // Navbar Invitado
+      }
+  }
 
   return (
     <>
-      {/* Renderizado Condicional: 2 Navbars Diferentes */}
-      {shouldShowNavbar && (
-        isUserAdmin ? (
-          // Pasamos los links de admin como prop (Modelo Naves)
-          <NavbarAdmin links={adminLinks} />
-        ) : (
-          // Pasamos los links públicos como prop (Modelo Naves)
-          <Navbar links={publicLinks} />
-        )
-      )}
+      {CurrentNavbar}
 
       <main className="flex-grow-1">
         <Suspense

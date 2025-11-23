@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "../atoms/Input"
+import Input from "../atoms/Input";
 import { Form } from 'react-bootstrap';
 
 function DynamicForm({inputs = []}) {

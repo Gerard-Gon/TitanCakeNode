@@ -72,20 +72,22 @@ function Contact() {
   };
 
   return (
-    <div className="login-container centrador login-wrapper">
-      <Container className="my-5">
-        <Text variant="h1" className="form-title">Contacto</Text>
-        <Text variant="p">Llena el formulario para informar el error y contactarte</Text>
-        <DynamicForm inputs={formInputs} />
-        <div className="mt-3">
-          <Button variant="primary" onClick={handleSubmit} className="me-2">
-            Enviar
-          </Button>
-          <Button variant="secondary" onClick={handleClear}>
-            Limpiar
-          </Button>
-        </div>
-      </Container>
+    <div className="contact-wrapper"> 
+      <div className="contact-container">
+        <Container className="my-5">
+          <Text variant="h1" className="form-title">Contacto</Text>
+          <Text variant="p">Llena el formulario para informar el error y contactarte</Text>
+          <DynamicForm inputs={formInputs} />
+          <div className="mt-3">
+            <Button variant="primary" onClick={handleSubmit} className="me-2">
+              Enviar
+            </Button>
+            <Button variant="secondary" onClick={handleClear}>
+              Limpiar
+            </Button>
+          </div>
+        </Container>
+      </div>
     </div>
   );
 }

@@ -24,11 +24,14 @@ function ProductCard({ product }) {
 
   return (
     <Card style={{ width: '18rem' }} className="m-2 marron">
-      <Image src={product.image} alt={product.name} className="card-img-top" />
+      {/* CAMBIO 1: product.image -> product.imageUrl */}
+      <Image src={product.imageUrl} alt={product.nombreProducto} className="card-img-top" />
+      
       <Card.Body className='texto-producto'>
         <CardBody
-          title={product.name}
-          price={product.price}
+          /* CAMBIO 2: product.name -> product.nombreProducto */
+          title={product.nombreProducto}
+          price={product.precio}
         />
         <Button variant="info" onClick={() => navigate(`/products/${product.id}`)}>
           Ver detalles

@@ -3,12 +3,14 @@ import Section from '../../../components/templates/Section';
 import CreateModal from '../../../components/organisms/CreateModal';
 import Button from '../../../components/atoms/Button';
 import productData from '../../../data/productoData';
-import ProductosService from '../../../services/ProductosService';
+// CORRECCIÓN: Asegúrate que el nombre del archivo coincida (ProductService vs ProductosService)
+import ProductosService from '../../../services/ProductService'; 
 import { generarMensaje } from '../../../utils/GenerarMensaje';
 
+// CONFIGURACIÓN: Usamos los nombres exactos que espera el Backend (Spring Boot)
 const createInputs = [
-  { name: "nombre", type: "text", placeholder: "Nombre", required: true },
-  { name: "descripcion", type: "textarea", placeholder: "Descripción", required: true, className: "h-28" },
+  { name: "nombreProducto", type: "text", placeholder: "Nombre del Producto", required: true },
+  { name: "descripcionProducto", type: "textarea", placeholder: "Descripción", required: true, className: "h-28" },
   { name: "stock", type: "number", placeholder: "Stock", required: true },
   { name: "precio", type: "number", placeholder: "Precio", required: true },
   { name: "imageUrl", type: "text", placeholder: "URL de la imagen", required: false },
@@ -21,35 +23,48 @@ function ProductsHome() {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
 
-  useEffect(() => {
-    const loadData = async () => {
-      const updatedData = [...pageData];
-      const tableItem = updatedData.find(i => i.service === "productos");
+  const loadData = async () => {
+    const updatedData = [...pageData];
+    const tableItem = updatedData.find(i => i.service === "productos");
 
-      if (tableItem) {
-        try {
-          setLoading(true);
-          const data = await ProductosService.getAllProductos();
-          const dataWithActions = data.map(producto => ({
-            ...producto,
-            onEdit: () => handleOpenEdit(producto),
-            onDelete: () => handleDelete(producto.id),
-          }));
-          tableItem.data = dataWithActions;
-        } catch (error) {
-          generarMensaje('No se pudieron cargar los productos', 'warning');
-          tableItem.data = [{ id: "Error", nombre: "No se pudieron cargar", descripcion: "Revisa tu conexión" }];
-        } finally {
-          setLoading(false);
-        }
+    if (tableItem) {
+      try {
+        setLoading(true);
+        // 1. Obtenemos la data cruda del backend (con nombreProducto, imageUrl, etc.)
+        const response = await ProductosService.getAllProductos();
+        const data = response.data; 
+
+        // 2. Preparamos la data para la tabla
+        const dataWithActions = data.map(producto => ({
+          ...producto,
+          // IMPORTANTE: Mapeamos los campos del backend a lo que espera la columna de la tabla
+          nombre: producto.nombreProducto,          // La tabla busca la columna "Nombre" -> usa row.nombre
+          descripcion: producto.descripcionProducto, // La tabla busca "descripcion" -> usa row.descripcion
+          
+          // Acciones
+          onEdit: () => handleOpenEdit(producto),
+          onDelete: () => handleDelete(producto.id),
+        }));
+
+        tableItem.data = dataWithActions;
+      } catch (error) {
+        console.error(error);
+        generarMensaje('No se pudieron cargar los productos', 'error');
+        tableItem.data = []; 
+      } finally {
+        setLoading(false);
       }
-      setPageData(updatedData);
-    };
+    }
+    setPageData(updatedData);
+  };
 
+  useEffect(() => {
     loadData();
   }, []);
 
   const handleOpenEdit = (producto) => {
+    // Como el 'producto' ya viene con las llaves del backend (nombreProducto, etc.)
+    // y nuestros inputs (createInputs) usan esos mismos nombres, ¡pasa directo!
     setEditingProduct(producto);
     setIsModalOpen(true);
   };
@@ -65,22 +80,14 @@ function ProductsHome() {
         generarMensaje('¡Producto creado con éxito!', 'success');
       }
 
-      const data = await ProductosService.getAllProductos();
-      const dataWithActions = data.map(producto => ({
-        ...producto,
-        onEdit: () => handleOpenEdit(producto),
-        onDelete: () => handleDelete(producto.id),
-      }));
-
-      const updatedData = [...pageData];
-      const tableItem = updatedData.find(i => i.service === "productos");
-      tableItem.data = dataWithActions;
-      setPageData(updatedData);
+      // Recargamos la tabla para ver los cambios
+      loadData();
 
       setIsModalOpen(false);
       setEditingProduct(null);
     } catch (error) {
-      generarMensaje('Error al guardar el producto', 'warning');
+      console.error(error);
+      generarMensaje('Error al guardar el producto', 'error');
     } finally {
       setSubmitLoading(false);
     }
@@ -92,20 +99,10 @@ function ProductsHome() {
     try {
       await ProductosService.deleteProducto(id);
       generarMensaje('¡Producto eliminado con éxito!', 'success');
-
-      const data = await ProductosService.getAllProductos();
-      const dataWithActions = data.map(producto => ({
-        ...producto,
-        onEdit: () => handleOpenEdit(producto),
-        onDelete: () => handleDelete(producto.id),
-      }));
-
-      const updatedData = [...pageData];
-      const tableItem = updatedData.find(i => i.service === "productos");
-      tableItem.data = dataWithActions;
-      setPageData(updatedData);
+      loadData(); // Recargar datos
     } catch (error) {
-      generarMensaje('Error al eliminar el producto', 'warning');
+      console.error(error);
+      generarMensaje('Error al eliminar el producto', 'error');
     }
   };
 
@@ -120,7 +117,10 @@ function ProductsHome() {
       <div className="container py-6 flex justify-end">
         <Button
           text="Crear Producto"
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            setEditingProduct(null);
+            setIsModalOpen(true);
+          }}
           className="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg font-medium shadow-md active:scale-95 transition-all"
         />
       </div>

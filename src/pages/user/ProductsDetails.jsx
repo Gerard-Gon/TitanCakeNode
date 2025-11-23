@@ -32,18 +32,19 @@ function ProductDetail() {
 
   return (
     <Container className="centrador">
-    <Button variant="info" onClick={() => navigate(`/products`)}>
-      Volver
-    </Button>
-    <Card  className="m-2 marron">
-      <Image src={product.image} alt={product.name} className="card-img-top-products-detail" />
-      <Card.Body className='texto-producto'>
-        <CardBody
-          title={product.name}
-          description={product.description}
-        />
-      </Card.Body>
-    </Card>
+      <Button variant="info" onClick={() => navigate(`/products`)}>
+        Volver
+      </Button>
+      <Card className="m-2 marron">
+        {/* CAMBIOS AQUÍ: imageUrl, nombreProducto, descripcionProducto */}
+        <Image src={product.imageUrl} alt={product.nombreProducto} className="card-img-top-products-detail" />
+        <Card.Body className='texto-producto'>
+          <CardBody
+            title={product.nombreProducto}
+            description={product.descripcionProducto}
+          />
+        </Card.Body>
+      </Card>
     </Container>
   );
 }

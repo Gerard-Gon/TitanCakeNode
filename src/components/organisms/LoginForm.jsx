@@ -1,28 +1,25 @@
+// src/components/organisms/LoginForm.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Forms from "../../components/templates/Forms"; // componente que renderiza loginData
+import Forms from "../../components/templates/Forms";
 import { generarMensaje } from "../../utils/GenerarMensaje";
 import UserService from "../../services/UserService";
 import { useAuth } from "../../context/AuthContext";
 import loginData from "../../pages/auth/data/loginData";
 
 export function LoginForm() {
-  // Estado del formulario
   const [form, setForm] = useState({ correo: "", contrasena: "" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth(); // contexto de autenticación
+  const { login } = useAuth();
 
-  // Maneja cambios en los inputs
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación básica
     if (!form.correo || !form.contrasena) {
       generarMensaje("Completa todos los campos", "warning");
       return;
@@ -31,47 +28,47 @@ export function LoginForm() {
     setLoading(true);
 
     try {
-      // Llamada al servicio de login
+      // 1. Enviamos las credenciales al backend
       const response = await UserService.login(form);
-      const usuario = response.data; // usuario completo desde el backend
+      const usuario = response.data;
 
-      // Guardar usuario en localStorage (sin token)
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          id: usuario.id,
-          nombre: usuario.nombre,
-          rol: usuario.rol,
-        })
-      );
-
-      // Guardar usuario en el contexto global
-      login({
+      // 2. Guardamos la sesión
+      // Adaptamos el objeto para guardar solo lo necesario
+      const userData = {
         id: usuario.id,
         nombre: usuario.nombre,
-        rol: usuario.rol,
-      });
+        correo: usuario.correo,
+        rol: usuario.rol // Guardamos el rol para saber si es admin
+      };
+
+      localStorage.setItem("user", JSON.stringify(userData));
+      login(userData);
 
       generarMensaje(`¡Bienvenido ${usuario.nombre}!`, "success");
 
-      // Redirección según rol
+      // 3. Redirección inteligente basada en el Rol
       setTimeout(() => {
-        if (usuario.rol.id === 1 || usuario.rol.id === 2) {
-          navigate("/admin/dashboard");
+        // Asumimos que rol.id 1 es Admin
+        if (usuario.rol && usuario.rol.id === 1) {
+            navigate("/admin/dashboard"); // O la ruta de admin que tengas
         } else {
-          navigate("/");
+            navigate("/");
         }
-      }, 1500);
+      }, 1000);
+
     } catch (error) {
-      const msg = error.response?.data || "Credenciales inválidas";
+      console.error(error);
+      const msg = error.response?.data || "Credenciales inválidas o error de conexión";
       generarMensaje(msg, "error");
     } finally {
       setLoading(false);
-      setForm({ correo: "", contrasena: "" }); // limpiar formulario
     }
   };
 
-  // Adaptar loginData con handlers y valores dinámicos
+  // ... (El resto del código para mapear loginData se mantiene igual que en la respuesta anterior) ...
+  // Si necesitas que repita esa parte del código para copiar y pegar completo, avísame.
+  
+  // Lógica de mapeo para el Forms
   const formDataWithHandlers = loginData.map((item, index) => {
     if (item.type === "inputs") {
       return {
@@ -83,39 +80,36 @@ export function LoginForm() {
         })),
       };
     }
-
     if (item.type === "button") {
       return {
         ...item,
         key: index,
         onClick: handleSubmit,
         disabled: loading,
-        text: loading ? "Iniciando..." : item.text,
+        text: loading ? "Ingresando..." : item.text,
       };
     }
-
     if (item.type === "text" && item.text[0].content.type === "button") {
-      // Ajustar el botón "Crear usuario" para usar navigate
-      return {
-        ...item,
-        key: index,
-        text: [
-          {
-            ...item.text[0],
-            content: (
-              <button
-                type="button"
-                onClick={() => navigate("/create-user")}
-                className="text-indigo-400 hover:text-indigo-300 underline transition"
-              >
-                Crear usuario
-              </button>
-            ),
-          },
-        ],
-      };
+        // Arreglo para el botón de "Crear usuario" dentro del login
+        return {
+            ...item,
+            key: index,
+            text: [
+                {
+                    ...item.text[0],
+                    content: (
+                        <button
+                            type="button"
+                            onClick={() => navigate('/create-user')}
+                            className="login-link bg-transparent border-0 p-0 inline-block"
+                        >
+                            Regístrate aquí
+                        </button>
+                    ),
+                },
+            ],
+        };
     }
-
     return { ...item, key: index };
   });
 

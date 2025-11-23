@@ -8,7 +8,9 @@ const Contact = lazy(() => import('../pages/user/Contact'));
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'));
 const CreateUser = lazy(() => import('../pages/auth/create-user'));
 const HomeAdmin = lazy(() => import('../pages/admin/HomeAdmin'));
+
 const HomeProductos = lazy(() => import('../pages/admin/Productos/HomeProductos'));
+const ProductForm = lazy(() => import('../pages/admin/Productos/ProductForm'));
 
 // Rutas públicas o del usuario, así están mejor organizadas
 const publicRoutes = [
@@ -25,7 +27,8 @@ const publicRoutes = [
 const adminRoutes = [
   { path: '/admin/HomeAdmin', element: <HomeAdmin />, isAdmin: true },
   { path: '/admin/productos', element: <HomeProductos />, isAdmin: true },
-  
+  { path: '/admin/productos/crear', element: <ProductForm />, isAdmin: true },
+  { path: '/admin/productos/editar/:id', element: <ProductForm />, isAdmin: true },
 ];
 
 // Ruta 404 por ahora no hice una página específica, solo un div simple (por ahora (puede cambiar (o eso creo)))

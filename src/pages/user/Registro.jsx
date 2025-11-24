@@ -1,6 +1,6 @@
 import React from 'react';
 import { RegisterForm } from '../../components/organisms/RegisterForm';
-import '../styles/pages/login.css'; 
+import '../../styles/pages/login.css';
 
 export function RegisterPage() {
   return (

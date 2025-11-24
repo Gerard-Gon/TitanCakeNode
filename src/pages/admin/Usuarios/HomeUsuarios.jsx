@@ -64,12 +64,12 @@ function HomeUsuarios() {
     };
 
     const handleCreateOrUpdate = async (formData) => {
-        // Validaciones básicas
+
         if (!formData.nombre || !formData.correo) {
             generarMensaje('Nombre y correo son obligatorios', 'warning');
             return;
         }
-        // Si es nuevo, contraseña obligatoria
+
         if (!editingUsuario && !formData.contrasena) {
             generarMensaje('La contraseña es obligatoria', 'warning');
             return;
@@ -79,7 +79,7 @@ function HomeUsuarios() {
         try {
             const payload = {
                 ...formData,
-                rol: { id: 2 } // Por defecto Cliente (ID 2)
+                rol: { id: 2 }
             };
 
             if (editingUsuario) {

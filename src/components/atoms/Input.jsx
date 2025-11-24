@@ -13,7 +13,7 @@ export default function Input({
   disabled = false,
   ...props
 }) {
-  // Definimos las clases base para mantener el código limpio y evitar repetición
+
   const baseClasses = `
     w-full px-4 py-2.5 text-sm text-gray-900
     border border-gray-300 rounded-lg
@@ -22,9 +22,9 @@ export default function Input({
     placeholder:text-gray-400
     ${disabled ? "bg-gray-50 cursor-not-allowed text-gray-500" : ""}
     ${className}
-  `.replace(/\s+/g, ' ').trim(); // Limpia saltos de línea y espacios extra
+  `.replace(/\s+/g, ' ').trim(); 
 
-  // Renderizado para Textarea
+
   if (type === "textarea") {
     return (
       <Form.Control
@@ -42,7 +42,7 @@ export default function Input({
     );
   }
 
-  // Renderizado para Input normal
+
   return (
     <Form.Control
       type={type}

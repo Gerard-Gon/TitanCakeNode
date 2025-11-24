@@ -15,7 +15,7 @@ describe('CardBody component', () => {
 
   it('should render price when provided', () => {
     render(<CardBody title="Torta" description="Descripción" price={8900} />);
-    const priceElement = screen.getByText('$8900');
+    const priceElement = screen.getByText('$8.900');
 
     expect(priceElement.tagName).toBe('SPAN');
     expect(priceElement.className).toContain('text-white');

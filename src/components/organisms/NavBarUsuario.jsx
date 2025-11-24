@@ -36,7 +36,6 @@ function NavbarUsuario() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           
-          {/* Enlaces de Cliente */}
           <Nav className="me-auto">
             <Nav.Link href="/">Inicio</Nav.Link>
             <Nav.Link href="/products">Productos</Nav.Link>
@@ -44,7 +43,6 @@ function NavbarUsuario() {
           </Nav>
 
           <Nav className="ms-auto align-items-center gap-3">
-            {/* Carrito con contador */}
             <Nav.Link href="/carrito" style={{ position: 'relative' }}>
               <img src={cartIcon} alt="Carrito" style={{ width: '50px', height: '50px' }} />
               {cartCount > 0 && (
@@ -58,7 +56,6 @@ function NavbarUsuario() {
               )}
             </Nav.Link>
 
-            {/* Botón Perfil */}
             <Button 
                 variant="outline-light"
                 onClick={() => navigate('/profile')}

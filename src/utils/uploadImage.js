@@ -1,14 +1,16 @@
-// src/utils/uploadImage.js
 import Resizer from 'react-image-file-resizer';
 
-const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
+const env = import.meta.env || {};
+const IMGBB_API_KEY = env.VITE_IMGBB_API_KEY;
 
 export const uploadToImgBB = async (file) => {
     return new Promise((resolve, reject) => {
         if (!IMGBB_API_KEY) {
+            console.warn("Falta la API KEY de ImgBB (Normal en entorno de Tests)");
             reject(new Error("Falta la API KEY de ImgBB en el archivo .env"));
             return;
         }
+        
         Resizer.imageFileResizer(
             file,
             1024,         

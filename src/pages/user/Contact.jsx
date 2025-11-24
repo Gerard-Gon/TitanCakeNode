@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 import Text from '../../components/atoms/Text.jsx';
 import DynamicForm from '../../components/molecules/DynamicForm.jsx';
 import Button from '../../components/atoms/Button.jsx';
-// CORRECCIÓN: Subimos dos niveles para llegar a styles
 import '../../styles/pages/contact.css'; 
 
 function Contact() {
@@ -46,7 +45,6 @@ function Contact() {
   const handleSubmit = () => {
     const { name, email, mensaje } = formData;
 
-    // Validaciones
     if (name.length > 100) {
       alert('El nombre no puede tener más de 100 caracteres.');
       return;

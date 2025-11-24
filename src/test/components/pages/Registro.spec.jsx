@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { RegisterPage } from '../../../pages/Registro';
+import { RegisterPage } from '../../../pages/user/Registro';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('RegisterPage component', () => {

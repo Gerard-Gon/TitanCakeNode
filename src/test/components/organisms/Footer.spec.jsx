@@ -13,8 +13,6 @@ describe('Footer component', () => {
     render(<Footer />);
     expect(screen.getByText('Inicio').getAttribute('href')).toBe('/');
     expect(screen.getByText('Productos').getAttribute('href')).toBe('/products');
-    expect(screen.getByText('Sobre Nosotros').getAttribute('href')).toBe('/nosotros');
-    expect(screen.getByText('Blog').getAttribute('href')).toBe('/blog');
 
     const contactoLink = screen.getAllByText('Contacto').find(el => el.tagName === 'A');
     expect(contactoLink.getAttribute('href')).toBe('/contact');

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import NotFound from '../../../pages/NotFound';
+import NotFound from '../../../pages/user/NotFound';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('NotFound component', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import Image from '../../components/atoms/Image';
-import '../styles/pages/notfound.css'
+import '../../styles/pages/notfound.css';
 
 
 const image = {

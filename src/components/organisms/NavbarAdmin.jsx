@@ -35,7 +35,6 @@ function NavBarAdmin() {
                 />
             </div>
 
-            {/* MODIFICADO: Quitamos size="sm" y agregamos padding/font-size */}
             <Button 
                 variant="danger" 
                 onClick={handleLogout} 

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
@@ -53,7 +52,6 @@ function ProductForm() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    // Lógica de subida de imagen usando tu util
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
         if(!file) return;
@@ -84,7 +82,7 @@ function ProductForm() {
             ...formData,
             precio: parseInt(formData.precio),
             stock: parseInt(formData.stock),
-            categoria: { id: 1 } // Ajustar según tu backend
+            categoria: { id: 1 }
         };
 
         try {

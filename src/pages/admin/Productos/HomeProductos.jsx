@@ -1,4 +1,3 @@
-// src/pages/admin/Productos/HomeProductos.jsx
 import React, { useState, useEffect } from 'react';
 import { Container, Spinner } from 'react-bootstrap';
 import Section from '../../../components/templates/Section';

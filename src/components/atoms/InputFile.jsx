@@ -1,12 +1,10 @@
 import React, { useState, useRef } from 'react';
-// Importamos el CSS general del admin
 import '../../styles/pages/admin.css';
 
 function InputFile({ onChange, accept = "image/*", className = "", disabled = false, preview = null }) {
     const [isDragging, setIsDragging] = useState(false);
     const inputRef = useRef(null);
 
-    // --- Manejadores de Drag & Drop ---
     const handleDragEnter = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -60,7 +58,6 @@ function InputFile({ onChange, accept = "image/*", className = "", disabled = fa
         );
     }
 
-    // --- Zona de Drop ---
     return (
         <div className={className} style={{ width: '100%' }}>
             <div 
@@ -70,7 +67,6 @@ function InputFile({ onChange, accept = "image/*", className = "", disabled = fa
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
             >
-                {/* Input Invisible */}
                 <input 
                     type="file" 
                     accept={accept} 
@@ -80,7 +76,6 @@ function InputFile({ onChange, accept = "image/*", className = "", disabled = fa
                     className="titan-file-input-hidden"
                 />
 
-                {/* Contenido Visual (Icono SVG) */}
                 <svg className="titan-dropzone-icon" viewBox="0 0 24 24" fill="none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                     <polyline points="17 8 12 3 7 8" />

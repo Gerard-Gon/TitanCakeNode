@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Home from '../../../pages/Home';
+import Home from '../../../pages/user/Home';
 
 describe('Home Page', () => {
   it('renderiza el título Bienvenidos', () => {
     render(<Home />);
     const title = screen.getByText('Bienvenidos');
-    expect(title).not.toBeNull(); // Jasmine: verifica que existe
+    expect(title).not.toBeNull(); 
     expect(title.tagName).toBe('H1');
-    expect(title.className).toContain('subtitulo');
+    expect(title.className).toContain('home-welcome-title'); 
   });
 
   it('renderiza el componente Carrousel con data-testid', () => {

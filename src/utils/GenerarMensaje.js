@@ -1,7 +1,6 @@
 let container = null;
 
 export const generarMensaje = (mensaje, tipo = 'info', duracion = 3000) => {
-    // Crear contenedor una sola vez
     if (!container) {
         container = document.createElement('div');
         container.className = 'fixed top-4 left-10 z-50 space-y-3';

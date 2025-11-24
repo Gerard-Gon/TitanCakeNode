@@ -1,38 +1,53 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import ProductDetail from '../../../pages/ProductsDetails';
-import products from '../../../data/products';
+import { render, screen, waitFor } from '@testing-library/react'; 
+import ProductDetail from '../../../pages/user/ProductsDetails'; 
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import ProductosService from '../../../services/ProductService'; 
 
 describe('ProductDetail component', () => {
-  it('should render product details when product exists', () => {
-    const product = products[0];
+  const mockProductData = {
+    id: 1,
+    nombreProducto: 'Berlin',
+    descripcionProducto: 'Delicioso berlin',
+    precio: 1200,
+    imageUrl: 'berlin.jpg',
+    stock: 10
+  };
 
-    render(
-      <MemoryRouter initialEntries={[`/products/${product.id}`]}>
-        <Routes>
-          <Route path="/products/:id" element={<ProductDetail />} />
-        </Routes>
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText(product.name)).toBeTruthy();
-    expect(screen.getByText(product.description)).toBeTruthy();
-    expect(screen.getByAltText(product.name)).toBeTruthy();
-    expect(screen.getByText('Volver')).toBeTruthy();
+  beforeEach(() => {
+    spyOn(ProductosService, 'getProductoById').and.returnValue(Promise.resolve({ data: mockProductData }));
   });
 
-  it('should show not found message when product does not exist', () => {
+  it('should render product details when product exists', async () => {
     render(
-      <MemoryRouter initialEntries={['/products/999999']}>
+      <MemoryRouter initialEntries={['/products/1']}>
         <Routes>
           <Route path="/products/:id" element={<ProductDetail />} />
         </Routes>
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Producto no encontrado!')).toBeTruthy();
-    expect(screen.getByText('no indages más')).toBeTruthy();
-    expect(screen.getByAltText('Not Found Image')).toBeTruthy();
+    await waitFor(() => {
+        expect(screen.getByText('Berlin')).toBeTruthy();
+    });
+    
+    expect(screen.getByText('Delicioso berlin')).toBeTruthy();
+    expect(screen.getByAltText('Berlin')).toBeTruthy();
+  });
+  
+  it('should show not found message when fetch fails', async () => {
+    ProductosService.getProductoById.and.returnValue(Promise.reject("Error"));
+
+    render(
+      <MemoryRouter initialEntries={['/products/999']}>
+        <Routes>
+          <Route path="/products/:id" element={<ProductDetail />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+     await waitFor(() => {
+        expect(screen.getByText('¡Producto no encontrado!')).toBeTruthy();
+    });
   });
 });

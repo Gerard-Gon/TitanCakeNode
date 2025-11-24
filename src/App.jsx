@@ -1,11 +1,9 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Suspense } from "react";
 
-// Datos
 import { publicLinks } from "./data/navbarPublicLinks";
 import { adminLinks } from "./data/navbarAdminLinks";
 
-// Componentes
 import Navbar from "./components/organisms/Navbar"; 
 import NavbarAdmin from "./components/organisms/NavbarAdmin"; 
 import NavbarUsuario from "./components/organisms/NavBarUsuario"; 

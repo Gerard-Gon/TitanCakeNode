@@ -6,9 +6,9 @@ import { MemoryRouter, Routes, Route, useLocation } from 'react-router-dom';
 describe('ProductCard component', () => {
   const mockProduct = {
     id: 1,
-    name: 'Torta de Chocolate',
-    price: '$5.990',
-    image: 'test.jpg',
+    nombreProducto: 'Torta de Chocolate', 
+    precio: 5990, 
+    imageUrl: 'test.jpg',
   };
 
   beforeEach(() => {
@@ -25,7 +25,7 @@ describe('ProductCard component', () => {
 
     expect(screen.getByAltText('Torta de Chocolate')).toBeTruthy();
     expect(screen.getByText('Torta de Chocolate')).toBeTruthy();
-    expect(screen.getByText((text) => text.includes('$5.990'))).toBeTruthy();
+    expect(screen.getByText((content, element) => content.includes('5.990'))).toBeTruthy();
   });
 
   it('should navigate to product detail page on "Ver detalles" click', () => {

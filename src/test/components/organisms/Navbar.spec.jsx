@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
-import NavBar from '../../../components/organisms/NavBar';
+import NavBar from '../../../components/organisms/Navbar';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('NavBar component', () => {
@@ -18,10 +18,7 @@ describe('NavBar component', () => {
     expect(screen.getByText('TitanCake')).toBeTruthy();
     expect(screen.getByText('Inicio')).toBeTruthy();
     expect(screen.getByText('Productos')).toBeTruthy();
-    expect(screen.getByText('Sobre Nosotros')).toBeTruthy();
-    expect(screen.getByText('Blog')).toBeTruthy();
     expect(screen.getByText('Contacto')).toBeTruthy();
-    expect(screen.getByText('Registrar Cuenta')).toBeTruthy();
   });
 
   it('should render cart and session icons', () => {

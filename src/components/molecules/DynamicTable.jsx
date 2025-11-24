@@ -48,7 +48,6 @@ function DynamicTable({ columns = [], data = [], className = '', striped = true,
                                         return (
                                             <td key={cellIndex} className="px-4 py-3 text-sm">
                                                 <div className="flex gap-2">
-                                                    {/* CORRECCIÓN: Pasamos el texto como 'children' (dentro de las etiquetas) en lugar de prop 'text' */}
                                                     <Button 
                                                         onClick={() => row.onEdit?.(row)}
                                                         className="titan-btn-action btn-edit"

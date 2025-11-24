@@ -7,7 +7,6 @@ import { useAuth } from "../../context/AuthContext";
 import loginData from "../../pages/auth/data/loginData";
 
 export function LoginForm() {
-  // El backend espera "correo" y "contrasena"
   const [form, setForm] = useState({ correo: "", contrasena: "" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -28,27 +27,21 @@ export function LoginForm() {
     setLoading(true);
 
     try {
-      // 1. Llamada al Backend
       const response = await UserService.login(form);
       
-      // El backend devuelve el objeto Usuario (sin contraseña)
       const usuarioBackend = response.data;
 
-      // 2. Crear sesión en el frontend
       const userData = {
         id: usuarioBackend.id,
         nombre: usuarioBackend.nombre,
         correo: usuarioBackend.correo,
-        rol: usuarioBackend.rol // Guardamos el rol para proteger rutas
+        rol: usuarioBackend.rol 
       };
 
-      // 3. Actualizar Contexto
       login(userData); 
       
       generarMensaje(`¡Bienvenido ${usuarioBackend.nombre}!`, "success");
 
-      // 4. Redirección basada en Rol
-      // Asumiendo que Rol ID 1 es Administrador
       if (usuarioBackend.rol && usuarioBackend.rol.id === 1) {
           navigate("/admin/HomeAdmin");
       } else {
@@ -67,14 +60,12 @@ export function LoginForm() {
     }
   };
 
-  // Mapeo de datos para el componente Forms (Igual que tenías, solo asegurando los names)
   const formDataWithHandlers = loginData.map((item, index) => {
     if (item.type === "inputs") {
       return {
         ...item,
         inputs: item.inputs.map((input) => ({
           ...input,
-          // Aseguramos que los inputs tengan el value del estado
           value: form[input.name] || "",
           onChange: handleChange,
         })),
@@ -89,7 +80,6 @@ export function LoginForm() {
         text: loading ? "Ingresando..." : item.text,
       };
     }
-    // ... manejo del botón de registro ...
     if (item.type === "text" && item.text[0].content.type === "button") {
          return {
             ...item,

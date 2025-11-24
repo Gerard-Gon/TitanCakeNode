@@ -6,9 +6,9 @@ import { publicLinks } from "./data/navbarPublicLinks";
 import { adminLinks } from "./data/navbarAdminLinks";
 
 // Componentes
-import Navbar from "./components/organisms/Navbar"; // Guest
-import NavbarAdmin from "./components/organisms/NavbarAdmin"; // Admin
-import NavbarUsuario from "./components/organisms/NavbarUsuario"; // NUEVO: Usuario Logueado
+import Navbar from "./components/organisms/Navbar"; 
+import NavbarAdmin from "./components/organisms/NavbarAdmin"; 
+import NavbarUsuario from "./components/organisms/NavbarUsuario"; 
 import Footer from "./components/organisms/Footer";
 
 import { appRoutes } from "./routes/config";
@@ -18,27 +18,27 @@ function Layout() {
   const location = useLocation();
   const { user, loading } = useAuth(); 
 
-  // Si está cargando la sesión, mostramos spinner para evitar parpadeos
+  
   if (loading) return <div className="text-center mt-5">Cargando...</div>;
 
-  // LÓGICA DE ROLES
+ 
   const isAdmin = user?.rol?.id === 1;
-  const isClient = user?.rol?.id === 2; // Asumiendo que 2 es el ID de usuario normal
+  const isClient = user?.rol?.id === 2; 
 
-  // Lógica de visibilidad (ocultar en login/registro)
+  
   const hideNavbarRoutes = ['/login', '/create-user'];
   const showNavbar = !hideNavbarRoutes.includes(location.pathname);
 
-  // Decidir qué Navbar Renderizar
+  
   let CurrentNavbar = null;
   
   if (showNavbar) {
       if (isAdmin) {
           CurrentNavbar = <NavbarAdmin links={adminLinks} />;
       } else if (isClient) {
-          CurrentNavbar = <NavbarUsuario />; // Navbar de Cliente
+          CurrentNavbar = <NavbarUsuario />; 
       } else {
-          CurrentNavbar = <Navbar links={publicLinks} />; // Navbar Invitado
+          CurrentNavbar = <Navbar links={publicLinks} />; 
       }
   }
 

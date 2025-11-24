@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Form, Button as BsButton, Spinner } from 'react-bootstrap';
 import InputFile from '../atoms/InputFile';
 import { uploadToImgBB } from '../../utils/uploadImage';
-
-// Importamos los estilos nuevos
 import '../../styles/pages/admin.css'; 
 
 function CreateModal({ isOpen, onClose, onSubmit, inputsConfig = [], title, submitText, loading, initialData = {} }) {

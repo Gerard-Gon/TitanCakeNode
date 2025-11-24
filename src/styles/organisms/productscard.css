@@ -2,7 +2,7 @@
   background-color: #4b2e2e;
   color: #fff;
   border: none;
-  height: 100%; /* permite que ocupe todo el alto disponible */
+  height: 100%; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -19,7 +19,7 @@
   background-color: #fff;
   color: #4b2e2e;
   border: none;
-  margin-top: auto; /* empuja el botón hacia abajo */
+  margin-top: auto; 
 }
 
 .card.marron .btn-light:hover {
@@ -29,7 +29,7 @@
 
 .card-img-top {
   margin: 15px 15px;
-  height: 240px; /* ajusta según lo que se vea mejor */
+  height: 240px; 
   object-fit: cover;
   width: 90% !important;
   border-radius: 10px;

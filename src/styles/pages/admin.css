@@ -1,5 +1,3 @@
-/* src/styles/pages/admin.css */
-
 /* --- Estilos Generales del Admin --- */
 .titan-page-bg {
     background-color: transparent !important; 
@@ -16,7 +14,7 @@
 }
 
 .titan-spinner {
-    color: #4b2e2e; /* Marrón */
+    color: #4b2e2e; 
     width: 4rem;
     height: 4rem;
 }
@@ -25,23 +23,18 @@
 .titan-page-bg .titan-btn-create {
     width: auto !important;
     font-size: 28px !important;
-    /* Aumentamos el padding para que el texto respire */
     padding: 0.8rem 2.5rem !important; 
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    
-    /* Estilos de Color Verde */
-    background-color: #28a745 !important; /* Verde vibrante */
+    background-color: #28a745 !important; 
     color: white !important;
     border: none !important;
-    
-    /* Espaciado de letras para corregir lo "apretado" */
     letter-spacing: 2px; 
     font-family: 'Cream Cake', cursive;
     transition: all 0.3s ease;
 }
 
 .titan-page-bg .titan-btn-create:hover {
-    background-color: #218838 !important; /* Verde más oscuro al pasar el mouse */
+    background-color: #218838 !important; 
     transform: scale(1.05);
     color: white !important;
 }
@@ -95,7 +88,7 @@
     margin: 0 auto;
 }
 
-/* Estilos internos de la tabla */
+
 .titan-table-container table {
     background-color: #fffbf5 !important;
     border-radius: 8px;

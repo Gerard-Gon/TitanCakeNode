@@ -11,14 +11,13 @@ export const uploadToImgBB = async (file) => {
         }
         Resizer.imageFileResizer(
             file,
-            1024,         // Ancho máximo
-            1024,         // Alto máximo
-            'WEBP',       // Formato
-            80,           // Calidad (0-100)
-            0,            // Rotación
+            1024,         
+            1024,         
+            'WEBP',      
+            80,          
+            0,           
             async (uri) => {
                 try {
-                    // La librería devuelve base64, hay que limpiarlo para enviarlo
                     const base64 = uri.split(',')[1];
                     const formData = new FormData();
                     formData.append('image', base64);
@@ -32,8 +31,8 @@ export const uploadToImgBB = async (file) => {
 
                     if (result.success) {
                         resolve({
-                            url: result.data.url, // Esta es la URL String para tu Backend Java
-                            preview: uri,         // Esto es para mostrarla en el formulario al instante
+                            url: result.data.url, 
+                            preview: uri,         
                         });
                     } else {
                         reject(new Error("Error en ImgBB: " + (result.error?.message || "Desconocido")));

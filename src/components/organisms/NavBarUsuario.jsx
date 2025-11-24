@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/organisms/navbar.css';
 import cartIcon from '../../img/cart-icon.png';
-import sesionIcon from '../../img/sesion.webp'; // Usamos el mismo icono para perfil
+import sesionIcon from '../../img/sesion.webp'; 
 import { useAuth } from '../../context/AuthContext';
 
 function NavbarUsuario() {
@@ -11,7 +11,7 @@ function NavbarUsuario() {
   const { logout, user } = useAuth();
   const [cartCount, setCartCount] = useState(0);
 
-  // Lógica del contador del carrito (Reutilizada del Navbar público)
+  
   const updateCount = () => {
     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
     const totalItems = storedCart.reduce((sum, item) => sum + item.quantity, 0);
@@ -25,7 +25,7 @@ function NavbarUsuario() {
   }, []);
 
   const handleLogout = () => {
-    logout(); // Usamos la función del contexto
+    logout(); 
     navigate('/login');
   };
 
@@ -62,14 +62,14 @@ function NavbarUsuario() {
             <Button 
                 variant="outline-light"
                 onClick={() => navigate('/profile')}
-                className="d-flex align-items-center gap-2 border-0"
+                className="d-flex align-items-center gap-2 border-0 btn-no-hover"
                 style={{ fontFamily: 'Cream Cake', fontSize: '1.5rem', color: '#D7BFAE' }}
             >
                 <img src={sesionIcon} alt="Perfil" style={{ width: '40px', height: '40px' }} />
                 Hola, {user?.nombre || 'Usuario'}
             </Button>
 
-            {/* Botón Salir (Estilo Admin) */}
+            
             <Button 
                 variant="danger" 
                 onClick={handleLogout} 

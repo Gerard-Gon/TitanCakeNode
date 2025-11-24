@@ -1,8 +1,6 @@
 import axios from "axios";
 
-// URL base de tu API de productos
 const API_URL = "https://titancakebackend.onrender.com/api/v1/productos"; 
-// ⚠️ Ajusta esta URL según tu backend real
 
 const ProductosService = {
   // Obtener todos los productos

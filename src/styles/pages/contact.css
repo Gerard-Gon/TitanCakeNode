@@ -21,20 +21,19 @@
     font-size: 50px !important;
 }
 
-/* src/styles/pages/contact.css */
 
 .contact-container {
   font-family: 'Cream Cake', cursive;
   font-size: 25px;
-  max-width: 600px; /* Aumentado un poco para mejor espacio */
-  height: auto;     /* Mejor auto que altura fija para evitar desbordes */
+  max-width: 600px; 
+  height: auto;     
   min-height: 550px;
   margin: 20px auto;
   padding: 3rem;
-  background-color: #4b2e2e; /* Tu color beige original */
+  background-color: #4b2e2e; 
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  color: #ffffff; /* Asegura que el texto sea legible */
+  color: #ffffff; 
 }
 
 .contact-wrapper {

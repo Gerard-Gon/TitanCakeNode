@@ -24,7 +24,7 @@ class UserService {
         return axios.get(`${BASE_URL}/${id}`);
     }
 
-    updateUsuario(id, data) {
+    updateUsuarioPut(id, data) {
         return axios.put(`${BASE_URL}/${id}`, data);
     }
 

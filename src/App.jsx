@@ -8,7 +8,7 @@ import { adminLinks } from "./data/navbarAdminLinks";
 // Componentes
 import Navbar from "./components/organisms/Navbar"; 
 import NavbarAdmin from "./components/organisms/NavbarAdmin"; 
-import NavbarUsuario from "./components/organisms/NavbarUsuario"; 
+import NavbarUsuario from "./components/organisms/NavBarUsuario"; 
 import Footer from "./components/organisms/Footer";
 
 import { appRoutes } from "./routes/config";

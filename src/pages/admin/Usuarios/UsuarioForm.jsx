@@ -76,7 +76,7 @@ function UsuarioForm() {
             } else {
                 await UserService.createUser(payload);
                 generarMensaje("¡Nuevo usuario creado!", "success");
-            }
+            }s
             navigate('/admin/users');
         } catch (error) {
             console.error(error);
